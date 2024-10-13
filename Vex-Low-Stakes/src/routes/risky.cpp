@@ -14,10 +14,10 @@ void risky(){
     TurnMaxTimePID(TestPara, 30, 0.4,true); //turn to face flat edge of goal
     MoveEncoderPID(TestPara, 100, 13, 0.4, 30, true); //move back to align with goal
     MoveEncoderPID(TestPara, 30, 13, 0.4, 30, true); //move slower to prevent goal from being knocked
-    Clamp.set(true); //close clamp
+    Sorter.set(true); //close clamp
     wait(200,msec);
     MoveEncoderPID(TestPara, 100, 0.2, 0.4,30, true); //move back to let goal sit in
-    Tilt.set(false); // tilt mogo
+    Sorter.set(false); // tilt mogo
     RunRoller(-100); //run intake
     TurnMaxTimePID(TestPara, -140, 0.8, true); //turn to face ring 1
     MoveEncoderPID(TestPara, -100, 26, 0.4, -140, true);
@@ -34,8 +34,8 @@ void risky(){
     RunRoller(100); //run intake backwards to prevent ring from getting in
     MoveEncoderPID(TestPara, -100, 170, 0.2, 70, true); //drive into ring 4
     TurnMaxTimePID(TestPara, -120, 0.6, true); //turn to drop mogo
-    Tilt.set(true); //drop mogo
-    Clamp.set(true);
+    Sorter.set(true); //drop mogo
+    Sorter.set(true);
     //wait(200,msec); //wait for mogo to be dropped
     MoveEncoderPID(TestPara, -100, 87, 0.1, -120, false);//drive into mogo and ladder
 }
