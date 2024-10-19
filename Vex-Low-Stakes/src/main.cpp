@@ -239,23 +239,23 @@ if(AutoSelectorVal==1)//Quali close 6 triball auto
 
 if(AutoSelectorVal==2)// Safe awp
 {
-  test2();
+  
 
 }
 
 if(AutoSelectorVal==3)//Risky
 {
-  risky();
+  
 } 
 
 if(AutoSelectorVal==4)// risky AWP
 {
-  ringquad();
+  
 }
 
 if(AutoSelectorVal==5)// 
 {
-  MogoRushQual();
+  
 }
 
 
@@ -368,32 +368,7 @@ int PTask(void)
         RunLift(pow1);
       }
     }
-
-// copy of macro so if i break it i still have a backup 
-  // while(true) {
-  //   if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
-  //     mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
-  //     RunLift(-100);
-  //     std::cout << mvel << std::endl; //test
-  //     if(abs(LiftSensor.position(degrees)) > 19) {
-  //       YTaskActiv = 0;
-  //     }
-  //   }
-  //   else {
-  //     pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
-  //     std::cout << mvel << std::endl; //test
-  //     if(pow1==0) {
-  //       Lift.setStopping(hold);
-  //       Lift.stop();
-  //     }
-  //     else {
-  //       RunLift(pow1);
-  //     }
-  //   } 
-
-    //commenting out the button a pressing macro because we do not have a rotation sensor for now
-
-    if(Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+    if(ATaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
       ButtonPressingA=1;
       ATaskActiv=1;
     }
@@ -434,6 +409,7 @@ void usercontrol(void) {
     task Dtask=task(DriveTask);
     task Atask=task(ATask);
     task Ptask=task(PTask);
+    task Btask=task(BTask);
     
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
@@ -465,4 +441,26 @@ int main() {
     wait(100, msec);
   }
 }
-  
+  // copy of macro so if i break it i still have a backup 
+  // while(true) {
+  //   if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
+  //     mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
+  //     RunLift(-100);
+  //     std::cout << mvel << std::endl; //test
+  //     if(abs(LiftSensor.position(degrees)) > 19) {
+  //       YTaskActiv = 0;
+  //     }
+  //   }
+  //   else {
+  //     pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
+  //     std::cout << mvel << std::endl; //test
+  //     if(pow1==0) {
+  //       Lift.setStopping(hold);
+  //       Lift.stop();
+  //     }
+  //     else {
+  //       RunLift(pow1);
+  //     }
+  //   } 
+
+    //commenting out the button a pressing macro because we do not have a rotation sensor for now

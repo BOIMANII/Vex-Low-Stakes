@@ -9,50 +9,16 @@
 void AWP(){
     //blue side
     PIDDataSet TestPara={1.5,0.1,0.15}; //initialize
-    Pistake.set(false); //intake down
-    Sorter.set(false); // ohly tilt 
-    RunRoller(-100);//
-    wait(200, msec);
-    MoveEncoderPID(TestPara, 100, 2.2, 0.3, 0, true);
-    RunRoller(0);
-    MoveEncoderPID(TestPara, -100, 5, 0.3, 0, true ); // drive forward to clear ring
-    wait(200, msec);
-    TurnMaxTimePID(TestPara, 100, 0.5, true );        
-    MoveEncoderPID(TestPara, 100, 7.8, 0.3, 100, true);
-    TurnMaxTimePID(TestPara, 50, 0.3, true);
-    MoveEncoderPID(TestPara, 100, 3, 0.3, 57, true);
-    wait(100,msec);
-    RunRoller(-100); //score onto alliance stake
-    wait(1250, msec); //wait for scoring both rings onto alliance stake
-    RunRoller(0); //run intake
-    MoveEncoderPID(TestPara, -100, 2.4, 0.3, 57, true);
-    TurnMaxTimePID(TestPara, -88, 0.5, true);
-    Sorter.set(true); // down to grab mogo
-
-    MoveEncoderPID(TestPara, 100, 25, 0.3, -88, false);
-    MoveEncoderPID(TestPara, 40, 25, 0.3, -88, true); //slow down to grab mogo
-    Sorter.set(true); //close clamp 
-    wait(400,msec);
-    MoveEncoderPID(TestPara, 100, 2, 0.4,-88, true); //move back to let goal sit in
-    Sorter.set(false); // tilt mogo
-    wait(380,msec);
-
-    TurnMaxTimePID(TestPara,102, 0.8,true); 
-    RunRoller(-100); //run intake
-
-    MoveEncoderPID(TestPara, -100, 22, 0.4, 102, true); //grab ring 2
-    TurnMaxTimePID(TestPara, 130,0.4,true);
-    MoveEncoderPID(TestPara, -60, 12, 0.4, 130, true); //grab ring 3
-    wait(200,msec);
-    TurnMaxTimePID(TestPara, -130,0.4,true); 
-    MoveEncoderPID(TestPara, -100, 13, 0.4, -130, true); //grab ring 4
-    wait(400,msec);
-    TurnMaxTimePID(TestPara, -55,0.6,true); //turn to face ladder
-    MoveEncoderPID(TestPara, -100, 35, 0.4, -55, false); //touch ladder
-   //should be within 15 seconds
-
-
-
+    wait(0.2, seconds);
+    MoveEncoderPID(TestPara, 60, 36.5, 0.2, 0, true);//Drive to mogo
+    MoveEncoderPID(TestPara, 10, .5, 0.2, 0, true);
+    wait(0.5, seconds);
+    Clamp.set(false);//clamp onto mogo
+    wait(0.5, seconds);
+    TurnMaxTimePID(TestPara, -90, 0.5, false);//turn towards stack
+    RunRoller(-100);
+    wait(0.5, seconds);
+    MoveEncoderPID(TestPara, -60, 36.5, 0.2, Gyro.angle(), true);//Drive to mogo
 
 
 }

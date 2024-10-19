@@ -25,7 +25,7 @@ digital_out Sorter = digital_out(Brain.ThreeWirePort.C);
 digital_out OPMECH = digital_out(Brain.ThreeWirePort.H);
 
 //Gyro and stuff for PID
-inertial Gyro = inertial(PORT10);
+inertial Gyro = inertial(PORT1);
 rotation LiftSensor = rotation(PORT3);
 //Naming convention: 
 // Important variables
