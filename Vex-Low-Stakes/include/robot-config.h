@@ -10,15 +10,18 @@ extern motor RF;
 extern motor RM;
 extern motor LB;
 extern motor RB;
-extern motor_group Roller;
-extern digital_out Tilt;
+extern motor In1;
+extern motor Lift;
 extern digital_out Clamp;
+extern digital_out Sorter;
 extern digital_out RightBackWing;
 extern digital_out Pistake;
 extern motor PU;
 extern inertial Gyro;
 extern digital_out LeftBackWing;
 extern digital_out OPMECH;
+extern rotation LiftSensor;
+
 extern const double wheelDiam;
 extern const double wheelToMotorRatio;
 
