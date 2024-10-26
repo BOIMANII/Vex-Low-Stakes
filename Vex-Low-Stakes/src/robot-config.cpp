@@ -12,11 +12,11 @@ controller Controller1 = controller(primary);
 motor LF = motor(PORT1, ratio6_1, false);
 motor LM = motor(PORT9, ratio6_1, false);
 motor LB = motor(PORT17, ratio6_1, false);; 
-motor RF = motor(PORT2, ratio6_1, true);
+motor RF = motor(PORT10, ratio6_1, true);
 motor RM = motor(PORT19, ratio6_1, true);
 motor RB = motor(PORT18, ratio6_1, true);
 motor In1 = motor(PORT6, ratio6_1, false);
-motor Lift = motor(PORT4, ratio6_1, true);
+motor Lift = motor(PORT2, ratio36_1, true);
 
 //Pistons
 digital_out Pistake = digital_out(Brain.ThreeWirePort.E);
