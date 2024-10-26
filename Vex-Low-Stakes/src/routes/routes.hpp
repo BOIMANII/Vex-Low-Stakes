@@ -7,4 +7,5 @@
 
 
 extern void AWP();
+extern void AllAWP();
 #endif

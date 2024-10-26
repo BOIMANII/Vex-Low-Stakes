@@ -50,7 +50,7 @@ void DisplayWords(void)
   Brain.Screen.print("n/a");
 
     Brain.Screen.setCursor(3,40);
-  Brain.Screen.print("Safe");
+  Brain.Screen.print("ALLAWP");
 
   Brain.Screen.setCursor(7,40);
   Brain.Screen.print("Risky AWP");

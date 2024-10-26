@@ -35,7 +35,7 @@ competition Competition;
 bool SP;
 bool EXIT;
 void pre_auton(void) {
-
+  //ATaskActiv = 1;
    EXIT=false;
   Pistake.set(true);
   Clamp.set(true);
@@ -116,12 +116,12 @@ Brain.Screen.setFont(monoM);
 if(AutoSelectorVal==2){
 Brain.Screen.setFillColor(black);
 
-  Brain.Screen.setFont(monoXL);
+Brain.Screen.setFont(monoXL);
 Brain.Screen.setPenColor("#f8b195");
 Brain.Screen.setCursor(3,10);
-Brain.Screen.print("Blue Side");
+Brain.Screen.print("ALLAWP");
 Brain.Screen.setCursor(4,10);
-Brain.Screen.print("SAFEAWP");
+Brain.Screen.print("AllAWP");
 Brain.Screen.setFont(monoM);
   Brain.Screen.setFillColor("#f8b195");
 }
@@ -232,14 +232,14 @@ Zeroing(true,true);
 
 //can start editing if nessary
 //Put Auto route function into if statements to use autoselector
-if(AutoSelectorVal==1)//Quali close 6 triball auto 
+if(AutoSelectorVal==1)//Normal
 {
   AWP();
 }
 
-if(AutoSelectorVal==2)// Safe awp
+if(AutoSelectorVal==2)// Left side either red/blue
 {
-  
+  AllAWP();
 
 }
 
@@ -308,6 +308,7 @@ int ATask(void)
   return 0;
 }
 
+
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
 int ButtonPressingA,ATaskActiv;
@@ -339,24 +340,93 @@ int PTask(void)
 
   return 0;
   }
-  int BTask(void) {
+
+/*
+int BTask(void) {
+  //ATaskActiv = 1;
+  //ButtonPressingA=0;
+  int pow1 = 0;
+    if(ATaskActiv==1&&Controller1.ButtonUp.pressing()&&ButtonPressingA==0) {
+
+
+      while(true) {
+    if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
+      mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
+      RunLift(-100);
+      std::cout << mvel << std::endl; //test
+      if(abs(LiftSensor.position(degrees)) > 19) {
+        YTaskActiv = 0;
+      }
+    }
+    else {
+      pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
+      std::cout << mvel << std::endl; //test
+      if(pow1==0) {
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      else {
+        RunLift(pow1);
+      }
+    } 
+      
+      if(abs(LiftSensor.position(degrees)) < 360) {
+        RunLift(-100);
+      }
+      /*if(abs(LiftSensor.position(degrees)) > 1) {
+        ATaskActiv = 0;
+      }
+      else if (abs(LiftSensor.position(degrees)) > 1) {
+      RunLift(100);
+      if(abs(LiftSensor.position(degrees)) < 1) {
+        ATaskActiv = 0;
+        RunLift(0);
+      }
+      } 
+      } 
+      
+    }
+
+    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
+
+    else if(ATaskActiv==0&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
+
+      ATaskActiv = 1;
+      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
+      if(pow1==0) {
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      else {
+        RunLift(pow1);
+      }
+      
+    }
+
+  return 0;
+}
+*/
+
+int BTask(void) {
 
   int pow1 = 0;
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 19) {
+      if(abs(LiftSensor.position(degrees)) < 20 ) {
         RunLift(-100);
-        if(abs(LiftSensor.position(degrees)) > 19) {
-          ATaskActiv = 0;
-        }
       } 
-      else if(abs(LiftSensor.position(degrees)) > 19) {
+      
+      else if(abs(LiftSensor.position(degrees)) > 23) {
         RunLift(100);
-        if(abs(LiftSensor.position(degrees)) < 29) {
-          ATaskActiv = 0;
-        }
+       
       } 
+      else{
+        ATaskActiv=0;
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      
     }
     else {
       pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
@@ -368,7 +438,8 @@ int PTask(void)
         RunLift(pow1);
       }
     }
-    if(ATaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
+
+    if(ATaskActiv==0&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
       ButtonPressingA=1;
       ATaskActiv=1;
     }
@@ -378,13 +449,15 @@ int PTask(void)
     else if(ATaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
       ButtonPressingA=1;
       ATaskActiv=0;
-      RunLift(0);
+      //RunLift(0);
     }
 
 
   }
   return 0;
 }
+
+
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -408,8 +481,9 @@ void usercontrol(void) {
     
     task Dtask=task(DriveTask);
     task Atask=task(ATask);
-    task Ptask=task(PTask);
     task Btask=task(BTask);
+    task Ptask=task(PTask);
+    //task Btask=task(BTask);
     
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
