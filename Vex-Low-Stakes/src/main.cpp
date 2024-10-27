@@ -413,11 +413,11 @@ int BTask(void) {
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 20 ) {
+      if(abs(LiftSensor.position(degrees)) < 326 ) {
         RunLift(-100);
       } 
       
-      else if(abs(LiftSensor.position(degrees)) > 23) {
+      else if(abs(LiftSensor.position(degrees)) > 326) {
         RunLift(100);
        
       } 
@@ -513,6 +513,7 @@ int main() {
   // Prevent main from exiting with an infinite loop.
   while (true) {
     wait(100, msec);
+    
   }
 }
   // copy of macro so if i break it i still have a backup 

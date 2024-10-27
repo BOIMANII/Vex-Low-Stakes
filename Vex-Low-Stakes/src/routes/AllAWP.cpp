@@ -7,8 +7,15 @@
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
 
 void AllAWP(){
-    //blue side
-    PIDDataSet p={1.5,0.1,0.15}; //initialize
-    MoveEncoderPID(p, 60, 36, 0.2, 0, false);
-    Clamp.set(false);    
+    //both sides
+    //Gyro.setHeading(0,degrees);
+    PIDDataSet Test={1.5,0.1,0.15}; //initialize
+    MoveEncoderPID(Test, 60, 36, 0.2, 0, false);
+    wait(1500, msec);
+    Clamp.set(false);
+    wait(500, msec);
+    RunRoller(-100);
+    wait(500, msec);
+    TurnMaxTimePID(Test, 90, 0.2, 0);
+    MoveEncoderPID(Test, 75, 10, 0.2, 90, 0);
 }
