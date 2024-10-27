@@ -108,9 +108,18 @@ RB.stop();
 
 void RunRoller(int val)
 {
-Roller.setMaxTorque(100,percent);
-Roller.spin(forward,(double)val/100.0*12,volt);
+In1.setMaxTorque(100,percent);
+In1.spin(forward,(double)val/100.0*12,volt);
 }
+
+void RunLift(int val) 
+{
+Lift.setMaxTorque(100,percent);
+Lift.spin(forward,(double)val/100.0*12,volt);
+}
+
+
+
 
 int PrevE;//Error at t-1
 

@@ -10,25 +10,23 @@ brain  Brain;
 // VEXcode device constructors
 controller Controller1 = controller(primary);
 motor LF = motor(PORT1, ratio6_1, false);
-motor LM = motor(PORT4, ratio6_1, false);
-motor LB = motor(PORT5, ratio6_1, false);;
-motor RF = motor(PORT2, ratio6_1, true);
-motor RM = motor(PORT3, ratio6_1, true);
-motor RB = motor(PORT6, ratio6_1, true);
-motor In1 = motor(PORT8, ratio6_1, false);
-motor In2 = motor(PORT7, ratio6_1, true);
-
-//Motor Groups
-motor_group Roller = motor_group(In1,In2);
+motor LM = motor(PORT9, ratio6_1, false);
+motor LB = motor(PORT17, ratio6_1, false);; 
+motor RF = motor(PORT10, ratio6_1, true);
+motor RM = motor(PORT19, ratio6_1, true);
+motor RB = motor(PORT18, ratio6_1, true);
+motor In1 = motor(PORT6, ratio6_1, false);
+motor Lift = motor(PORT2, ratio36_1, true);
 
 //Pistons
-digital_out Pistake = digital_out(Brain.ThreeWirePort.C);
-digital_out Tilt = digital_out(Brain.ThreeWirePort.B);
-digital_out Clamp = digital_out(Brain.ThreeWirePort.A);
-digital_out OPMECH = digital_out(Brain.ThreeWirePort.D);
+digital_out Pistake = digital_out(Brain.ThreeWirePort.E);
+digital_out Clamp = digital_out(Brain.ThreeWirePort.E);
+digital_out Sorter = digital_out(Brain.ThreeWirePort.C);
+digital_out OPMECH = digital_out(Brain.ThreeWirePort.H);
 
 //Gyro and stuff for PID
-inertial Gyro = inertial(PORT10);
+inertial Gyro = inertial(PORT1);
+rotation LiftSensor = rotation(PORT3);
 //Naming convention: 
 // Important variables
 const double wheelDiam = 2.75;
