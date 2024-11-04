@@ -22,10 +22,10 @@ motor Lift = motor(PORT2, ratio36_1, true);
 digital_out Pistake = digital_out(Brain.ThreeWirePort.E);
 digital_out Clamp = digital_out(Brain.ThreeWirePort.E);
 digital_out Sorter = digital_out(Brain.ThreeWirePort.C);
-digital_out OPMECH = digital_out(Brain.ThreeWirePort.H);
+digital_out IntakeLift = digital_out(Brain.ThreeWirePort.H);
 
 //Gyro and stuff for PID
-inertial Gyro = inertial(PORT1);
+inertial Gyro = inertial(PORT11);
 rotation LiftSensor = rotation(PORT3);
 //Naming convention: 
 // Important variables

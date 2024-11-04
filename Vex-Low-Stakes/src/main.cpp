@@ -9,6 +9,7 @@
 
 //#include "STDLib.cpp"
 #include "vex.h"
+#include <iostream>
 
 #include "screen_gui.hpp"
 #include "movement.hpp"
@@ -227,41 +228,40 @@ void autonomous(void) {
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
 
 //Do not change the below
-PIDDataSet TestPara={4,0.1,0.2};
+PIDDataSet TestPara={1.5,0.1,0.15};
 Zeroing(true,true);
 
 //can start editing if nessary
 //Put Auto route function into if statements to use autoselector
 if(AutoSelectorVal==1)//Normal
 {
-  AWP();
+  Blue_2Ring();
 }
 
 if(AutoSelectorVal==2)// Left side either red/blue
 {
-  AllAWP();
-
+  Red_2Ring();
 }
 
 if(AutoSelectorVal==3)//Risky
 {
-  
+  Blue_4Ring();
 } 
 
 if(AutoSelectorVal==4)// risky AWP
 {
-  
+  Red_4Ring();
 }
 
 if(AutoSelectorVal==5)// 
 {
-  
+    //Blue_MogoRush();
 }
 
 
 if(AutoSelectorVal==6)//AWP only
 {
-  
+  //Red_MogoRush();
 }
 
 
@@ -340,6 +340,33 @@ int PTask(void)
 
   return 0;
   }
+  int OTask(void)
+{
+    while(true)
+    {
+      //Toggles Tilt
+    if(YTaskActiv==0&&Controller1.ButtonY.pressing()&&ButtonPressingY==0)//Finding if ButtonY is pressing and if it was held down before.
+    {
+      ButtonPressingY=1;//Button is now pressed
+      YTaskActiv=1;//Task is now active
+      IntakeLift.set(true);
+    }
+
+    else if(!Controller1.ButtonY.pressing())ButtonPressingY=0;
+
+    else if(YTaskActiv==1&&Controller1.ButtonY.pressing()&&ButtonPressingY==0)//Finding if task is active and if ButtonX wasn't pressed before
+    {
+      ButtonPressingY=1;//Button is now pressed
+      YTaskActiv=0;//Task is now NOT running
+      IntakeLift.set(false);
+    }
+    //----------------------
+      //Toggles intake lift
+
+    }
+
+  return 0;
+  }
 
 /*
 int BTask(void) {
@@ -413,11 +440,11 @@ int BTask(void) {
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 326 ) {
+      if(abs(LiftSensor.position(degrees)) > 32 ) {
         RunLift(-100);
       } 
       
-      else if(abs(LiftSensor.position(degrees)) > 326) {
+      else if(abs(LiftSensor.position(degrees)) < 32) {
         RunLift(100);
        
       } 
@@ -483,6 +510,7 @@ void usercontrol(void) {
     task Atask=task(ATask);
     task Btask=task(BTask);
     task Ptask=task(PTask);
+    task Otask=task(OTask);    
     //task Btask=task(BTask);
     
     // ........................................................................
@@ -501,19 +529,23 @@ void usercontrol(void) {
 
 
 int main() {
-  
+  // Reset pos below for Macro to function better.
+  //LiftSensor.setPosition(-2, degrees);
+  LiftSensor.setReversed(true);
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
   // Run the pre-autonomous function.
   pre_auton();
+  wait(100, msec);
   
   
-
   // Prevent main from exiting with an infinite loop.
   while (true) {
     wait(100, msec);
-    
+    using std::cout;
+    using std::endl;
+    cout << Gyro.angle() << endl;
   }
 }
   // copy of macro so if i break it i still have a backup 

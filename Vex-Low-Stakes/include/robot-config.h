@@ -19,7 +19,7 @@ extern digital_out Pistake;
 extern motor PU;
 extern inertial Gyro;
 extern digital_out LeftBackWing;
-extern digital_out OPMECH;
+extern digital_out IntakeLift;
 extern rotation LiftSensor;
 
 extern const double wheelDiam;

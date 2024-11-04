@@ -162,7 +162,7 @@ if(fabs(CSpeed)<fabs((double)Speed))
 
   Correction=PVal+IVal+DVal/0.02;
 
-  Move(CSpeed-Correction,CSpeed+Correction);
+  Move(CSpeed+Correction,CSpeed-Correction);
   PrevE=LGV;
   wait(20, msec);
   }
@@ -204,7 +204,7 @@ void TurnMaxTimePID(PIDDataSet KVals,double DeltaAngle,double TE, bool brake){
 
   Correction=PVal+IVal+DVal/0.02;
 
-  Move(CSpeed-Correction,CSpeed+Correction);
+  Move(CSpeed+Correction,CSpeed-Correction);
   PrevE=LGV;
   wait(20, msec);
   }
@@ -280,7 +280,7 @@ if(fabs(CSpeed)<fabs((double)Speed))
 
   Correction=PVal+IVal+DVal/0.02;
 
-  Move(-CSpeed-Correction,-CSpeed+Correction);
+  Move(-CSpeed+Correction,-CSpeed-Correction);
   PrevE=LGV;
   wait(20, msec);
   }

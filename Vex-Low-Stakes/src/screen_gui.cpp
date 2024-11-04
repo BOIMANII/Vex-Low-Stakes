@@ -41,22 +41,22 @@ void DisplayWords(void)
   Brain.Screen.setPenColor("#f8b195");
   Brain.Screen.setFont(monoM);
   Brain.Screen.setCursor(3,3);
-  Brain.Screen.print("AWP");
+  Brain.Screen.print("Blue_2Ring");
 
   Brain.Screen.setCursor(7,3);
-  Brain.Screen.print("Risky");
+  Brain.Screen.print("Blue_4Ring");
 
     Brain.Screen.setCursor(11,3);
-  Brain.Screen.print("n/a");
+  Brain.Screen.print("Blue_MogoRush");
 
     Brain.Screen.setCursor(3,40);
-  Brain.Screen.print("ALLAWP");
+  Brain.Screen.print("Red_2Ring");
 
   Brain.Screen.setCursor(7,40);
-  Brain.Screen.print("Risky AWP");
+  Brain.Screen.print("Red_4Ring");
 
     Brain.Screen.setCursor(11,40);
-  Brain.Screen.print("ML-AWP");
+  Brain.Screen.print("Red_MogoRush");
 
       Brain.Screen.setCursor(11,22);
   Brain.Screen.print("Skills");
