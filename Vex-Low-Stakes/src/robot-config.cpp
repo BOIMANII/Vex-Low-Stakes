@@ -20,7 +20,6 @@ motor In1 = motor(PORT13, ratio6_1, false);
 
 
 //Pistons
-digital_out Pistake = digital_out(Brain.ThreeWirePort.H);
 digital_out Clamp = digital_out(Brain.ThreeWirePort.H);
 digital_out Sorter = digital_out(Brain.ThreeWirePort.C);
 digital_out IntakeLift = digital_out(Brain.ThreeWirePort.E);

@@ -38,7 +38,6 @@ bool EXIT;
 void pre_auton(void) {
   //ATaskActiv = 1;
    EXIT=false;
-  Pistake.set(true);
   Clamp.set(false);
   Sorter.set(false);
   IntakeLift.set(true);
@@ -294,7 +293,7 @@ int DriveTask(void){
 return 0;
 }
 int V;
-int ATask(void)
+/*int ATask(void)
 {
   double pow;
     while(true)
@@ -308,13 +307,13 @@ int ATask(void)
   
   return 0;
 }
-
+*/
 
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
 int ButtonPressingA,ATaskActiv;
 int ButtonPressingB,BTaskActiv;
-int PTask(void)
+int XTask(void)
 {
     while(true)
     {
@@ -341,7 +340,7 @@ int PTask(void)
 
   return 0;
   }
-  int OTask(void)
+  int YTask(void)
 {
     while(true)
     {
@@ -350,7 +349,7 @@ int PTask(void)
     {
       ButtonPressingY=1;//Button is now pressed
       YTaskActiv=1;//Task is now active
-      IntakeLift.set(true);
+      
     }
 
     else if(!Controller1.ButtonY.pressing())ButtonPressingY=0;
@@ -359,6 +358,33 @@ int PTask(void)
     {
       ButtonPressingY=1;//Button is now pressed
       YTaskActiv=0;//Task is now NOT running
+      
+    }
+    //----------------------
+      //Toggles Doinky doinker
+
+    }
+
+  return 0;
+  }
+int BTask(void)
+{
+    while(true)
+    {
+      //Toggles Tilt
+    if(BTaskActiv==0&&Controller1.ButtonY.pressing()&&ButtonPressingB==0)//Finding if ButtonY is pressing and if it was held down before.
+    {
+      ButtonPressingY=1;//Button is now pressed
+      BTaskActiv=1;//Task is now active
+      IntakeLift.set(true);
+    }
+
+    else if(!Controller1.ButtonB.pressing())ButtonPressingB=0;
+
+    else if(BTaskActiv==1&&Controller1.ButtonY.pressing()&&ButtonPressingB==0)//Finding if task is active and if ButtonX wasn't pressed before
+    {
+      ButtonPressingY=0;//Button is now pressed
+      BTaskActiv=0;//Task is now NOT running
       IntakeLift.set(false);
     }
     //----------------------
@@ -369,73 +395,9 @@ int PTask(void)
   return 0;
   }
 
-/*
-int BTask(void) {
-  //ATaskActiv = 1;
-  //ButtonPressingA=0;
-  int pow1 = 0;
-    if(ATaskActiv==1&&Controller1.ButtonUp.pressing()&&ButtonPressingA==0) {
 
 
-      while(true) {
-    if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
-      mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
-      RunLift(-100);
-      std::cout << mvel << std::endl; //test
-      if(abs(LiftSensor.position(degrees)) > 19) {
-        YTaskActiv = 0;
-      }
-    }
-    else {
-      pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
-      std::cout << mvel << std::endl; //test
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-    } 
-      
-      if(abs(LiftSensor.position(degrees)) < 360) {
-        RunLift(-100);
-      }
-      /*if(abs(LiftSensor.position(degrees)) > 1) {
-        ATaskActiv = 0;
-      }
-      else if (abs(LiftSensor.position(degrees)) > 1) {
-      RunLift(100);
-      if(abs(LiftSensor.position(degrees)) < 1) {
-        ATaskActiv = 0;
-        RunLift(0);
-      }
-      } 
-      } 
-      
-    }
-
-    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
-
-    else if(ATaskActiv==0&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
-
-      ATaskActiv = 1;
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-      
-    }
-
-  return 0;
-}
-*/
-
-int BTask(void) {
+int ATask(void) {
 
   int pow1 = 0;
 
@@ -509,10 +471,9 @@ void usercontrol(void) {
     
     task Dtask=task(DriveTask);
     task Atask=task(ATask);
+    task Xtask=task(XTask);
+    task Ytask=task(YTask);    
     task Btask=task(BTask);
-    task Ptask=task(PTask);
-    task Otask=task(OTask);    
-    //task Btask=task(BTask);
     
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
@@ -572,3 +533,71 @@ int main() {
   //   } 
 
     //commenting out the button a pressing macro because we do not have a rotation sensor for now
+
+
+
+/*
+int BTask(void) {
+  //ATaskActiv = 1;
+  //ButtonPressingA=0;
+  int pow1 = 0;
+    if(ATaskActiv==1&&Controller1.ButtonUp.pressing()&&ButtonPressingA==0) {
+
+
+      while(true) {
+    if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
+      mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
+      RunLift(-100);
+      std::cout << mvel << std::endl; //test
+      if(abs(LiftSensor.position(degrees)) > 19) {
+        YTaskActiv = 0;
+      }
+    }
+    else {
+      pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
+      std::cout << mvel << std::endl; //test
+      if(pow1==0) {
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      else {
+        RunLift(pow1);
+      }
+    } 
+      
+      if(abs(LiftSensor.position(degrees)) < 360) {
+        RunLift(-100);
+      }
+      /*if(abs(LiftSensor.position(degrees)) > 1) {
+        ATaskActiv = 0;
+      }
+      else if (abs(LiftSensor.position(degrees)) > 1) {
+      RunLift(100);
+      if(abs(LiftSensor.position(degrees)) < 1) {
+        ATaskActiv = 0;
+        RunLift(0);
+      }
+      } 
+      } 
+      
+    }
+
+    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
+
+    else if(ATaskActiv==0&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
+
+      ATaskActiv = 1;
+      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
+      if(pow1==0) {
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      else {
+        RunLift(pow1);
+      }
+      
+    }
+
+  return 0;
+}
+*/
