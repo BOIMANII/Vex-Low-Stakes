@@ -40,7 +40,7 @@ void pre_auton(void) {
    EXIT=false;
   Clamp.set(false);
   Sorter.set(false);
-  IntakeLift.set(true);
+  IntakeLift.set(false);
   PX=0;
   JX=0;
   AutoSelectorVal=0;
@@ -293,12 +293,12 @@ int DriveTask(void){
 return 0;
 }
 int V;
-/*int ATask(void)
+int ITask(void)
 {
   double pow;
     while(true)
   {
-    pow=((Controller1.ButtonL2.pressing()-Controller1.ButtonL1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
+    pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
     RunRoller(-pow);
     
   
@@ -307,7 +307,7 @@ int V;
   
   return 0;
 }
-*/
+
 
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
@@ -403,11 +403,11 @@ int ATask(void) {
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) > 32 ) {
+      if(abs(LiftSensor.position(degrees)) > 217 ) {
         RunLift(-100);
       } 
       
-      else if(abs(LiftSensor.position(degrees)) < 32) {
+      else if(abs(LiftSensor.position(degrees)) < 217) {
         RunLift(100);
        
       } 
@@ -419,7 +419,7 @@ int ATask(void) {
       
     }
     else {
-      pow1=(Controller1.ButtonR1.pressing()-Controller1.ButtonR2.pressing())*100;
+      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
       if(pow1==0) {
         Lift.setStopping(hold);
         Lift.stop();
@@ -474,6 +474,7 @@ void usercontrol(void) {
     task Xtask=task(XTask);
     task Ytask=task(YTask);    
     task Btask=task(BTask);
+    task Itask=task(ITask);
     
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
@@ -507,7 +508,7 @@ int main() {
     wait(100, msec);
     using std::cout;
     using std::endl;
-    cout << Gyro.angle() << endl;
+    cout << LiftSensor.angle() << endl;
   }
 }
   // copy of macro so if i break it i still have a backup 

@@ -11,12 +11,12 @@ brain  Brain;
 controller Controller1 = controller(primary);
 motor LF = motor(PORT14, ratio6_1, false);
 motor LM = motor(PORT16, ratio6_1, false);
-motor LB = motor(PORT1, ratio6_1, false);; 
-motor RF = motor(PORT5, ratio6_1, true);
-motor RM = motor(PORT4, ratio6_1, true);
+motor LB = motor(PORT11, ratio6_1, false);; 
+motor RF = motor(PORT13, ratio6_1, true);
+motor RM = motor(PORT18, ratio6_1, true);
 motor RB = motor(PORT11, ratio6_1, true);
-motor Lift = motor(PORT2, ratio36_1, true);
-motor In1 = motor(PORT13, ratio6_1, false);
+motor Lift = motor(PORT10, ratio36_1, true);
+motor In1 = motor(PORT20, ratio6_1, false);
 
 
 //Pistons
@@ -26,7 +26,7 @@ digital_out IntakeLift = digital_out(Brain.ThreeWirePort.E);
 
 //Gyro and stuff for PID
 inertial Gyro = inertial(PORT3);
-rotation LiftSensor = rotation(PORT15);
+rotation LiftSensor = rotation(PORT6);
 //Naming convention: 
 // Important variables
 const double wheelDiam = 2.75;
