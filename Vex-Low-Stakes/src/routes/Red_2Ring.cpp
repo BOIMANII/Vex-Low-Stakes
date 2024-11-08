@@ -42,10 +42,10 @@ void Red_2Ring(){
     MoveEncoderPID(Test, -75, 10, 0.2, 90, 0);
     */
     PIDDataSet Test={1.5,0.1,0.15}; //initialize
-    MoveEncoderPID(Test, 70, 26.75, 0.2, 0, 1);
+    MoveEncoderPID(Test, 70, 26.75, 0.25, 0, 1);
     TurnMaxTimePID(Test, 0, 0.2, 0);
     wait(250, msec);
-    Clamp.set(false);
+    Clamp.set(true);
     wait(750, msec);
     RunRoller(-100);
     wait(500, msec);

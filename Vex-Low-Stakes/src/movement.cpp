@@ -108,14 +108,14 @@ RB.stop();
 
 void RunRoller(int val)
 {
-In1.setMaxTorque(100,percent);
-In1.spin(forward,(double)val/100.0*12,volt);
+Lift.setMaxTorque(100,percent);
+Lift.spin(reverse,(double)val/100.0*12,volt);
 }
 
 void RunLift(int val) 
 {
-Lift.setMaxTorque(100,percent);
-Lift.spin(forward,(double)val/100.0*12,volt);
+In1.setMaxTorque(100,percent);
+In1.spin(reverse,(double)val/100.0*12,volt);
 }
 
 

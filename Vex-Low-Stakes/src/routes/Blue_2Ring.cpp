@@ -30,8 +30,8 @@ void Blue_2Ring(){
     */
     
     PIDDataSet Test={1.5,0.1,0.15}; //initialize
-    MoveEncoderPID(Test, 80, 26.75, 0.2, 0, false);
-    wait(250, msec);
+    MoveEncoderPID(Test, 80, 20, 0.2, 0, false);
+    wait(350, msec);
     Clamp.set(false);
     wait(750, msec);
     RunRoller(-100);

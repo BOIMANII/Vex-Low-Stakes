@@ -9,12 +9,12 @@
 void MogoRushQual() {
     PIDDataSet TestPara={1.5,0.1,0.15}; //initialize
     MoveEncoderPID(TestPara, 100, 58, 0.4, 0, true);//Grab mogo rush angled
-    OPMECH.set(true);
+    //OPMECH.set(true);
     MoveEncoderPID(TestPara, -100, 25, 0.4, 0, true );
     TurnMaxTimePID(TestPara, 30, 0.5, true);
     MoveEncoderPID(TestPara,-100,  36, 0.4, 30, true);
     TurnMaxTimePID(TestPara, 120, 0.5, true);
-    OPMECH.set(false);
+    //OPMECH.set(false);
    
 
     MoveEncoderPID(TestPara, -100, 6, 0.4, 120, true);
@@ -25,7 +25,7 @@ void MogoRushQual() {
     Clamp.set(true); //close clamp 
     wait(400,msec);
     MoveEncoderPID(TestPara, 100, 2, 0.4,-22, true); //move back to let goal sit in
-    Tilt.set(false); // tilt mogo
+    //Tilt.set(false); // tilt mogo
     wait(100,msec);
     TurnMaxTimePID(TestPara, -90,  0.6, true);
     Pistake.set(false);

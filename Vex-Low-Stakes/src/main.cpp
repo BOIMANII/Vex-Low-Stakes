@@ -39,8 +39,9 @@ void pre_auton(void) {
   //ATaskActiv = 1;
    EXIT=false;
   Pistake.set(true);
-  Clamp.set(true);
+  Clamp.set(false);
   Sorter.set(false);
+  IntakeLift.set(true);
   PX=0;
   JX=0;
   AutoSelectorVal=0;
@@ -298,7 +299,7 @@ int ATask(void)
   double pow;
     while(true)
   {
-    pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
+    pow=((Controller1.ButtonL2.pressing()-Controller1.ButtonL1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
     RunRoller(-pow);
     
   
@@ -456,7 +457,7 @@ int BTask(void) {
       
     }
     else {
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
+      pow1=(Controller1.ButtonR1.pressing()-Controller1.ButtonR2.pressing())*100;
       if(pow1==0) {
         Lift.setStopping(hold);
         Lift.stop();
