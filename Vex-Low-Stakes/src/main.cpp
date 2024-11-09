@@ -537,17 +537,15 @@ int main() {
   // Prevent main from exiting with an infinite loop.
   while (true) {
     wait(1, sec);
-    RunRoller(-100);
     using std::cout;
     using std::endl;
-    cout << "BTaskActiv below" << endl;
-    cout << BTaskActiv << endl;
     cout << "Gyro Heading below" << endl;
     cout << Gyro.angle() << endl;
     cout << "Macro Angle below" << endl;
     cout << LiftSensor.angle() << endl;
   }
 }
+
   // copy of macro so if i break it i still have a backup 
   // while(true) {
   //   if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {

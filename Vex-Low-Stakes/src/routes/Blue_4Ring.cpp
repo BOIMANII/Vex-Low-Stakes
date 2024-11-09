@@ -10,23 +10,21 @@ void Blue_4Ring(){
     //both sides
     //Gyro.setHeading(0,degrees);
     PIDDataSet Test={1.5,0.1,0.15}; //initialize
-    TurnMaxTimePID(Test, 0, 0.2, true);
-    MoveEncoderPID(Test, 75, 35, 0.3, 0, 1);
+    MoveEncoderPID(Test, 75, 34, 0.3, 0, 1); // move to mogo
     wait(250, msec);
-    Clamp.set(true);
+    Clamp.set(true);// clamp mogo
     wait(750, msec);
-    MoveEncoderPID(Test, 70, 1, 0.2, 0, 0);
-    RunRoller(100);
-    wait(500, msec);
-    TurnMaxTimePID(Test, -90, 0.7, 0);
-    MoveEncoderPID(Test, -75, 13, 0.1, -90, 0);
+    RunRoller(100);//intakepreload, prepare to intake center
+    TurnMaxTimePID(Test, -147, 0.7, 0); // turn to face center rings
+    MoveEncoderPID(Test, -75, 12.9, 0.2, -147, 0); // drive into center rings
+    wait(500, msec);// debug wait
+    TurnMaxTimePID(Test, -90, 0.7, 0); // turn to face other ring   
+    MoveEncoderPID(Test, -45, 13, 0.1, -90, 0); // drive into other ring
     wait(250, msec);
-    RunRoller(-100);
-    wait(400, msec);
-    TurnMaxTimePID(Test, -95, 0.7, 0);
-    MoveEncoderPID(Test, -75, 3, 0.2, -95, 0);
-    wait(250, msec);
-    RunRoller(-100);
+    TurnMaxTimePID(Test, 37, 0.7, 0);
+    MoveEncoderPID(Test, -50, 10, 0.2, 40, 0);
+    wait(5, sec);
+
    
 
  
