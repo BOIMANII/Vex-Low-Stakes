@@ -21,11 +21,11 @@ motor In1 = motor(PORT20, ratio6_1, false);
 
 //Pistons
 digital_out Clamp = digital_out(Brain.ThreeWirePort.H);
-digital_out Sorter = digital_out(Brain.ThreeWirePort.C);
+digital_out Doinker = digital_out(Brain.ThreeWirePort.G);
 digital_out IntakeLift = digital_out(Brain.ThreeWirePort.E);
 
 //Gyro and stuff for PID
-inertial Gyro = inertial(PORT3);
+inertial Gyro = inertial(PORT12);
 rotation LiftSensor = rotation(PORT6);
 //Naming convention: 
 // Important variables

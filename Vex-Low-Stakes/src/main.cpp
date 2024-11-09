@@ -39,8 +39,8 @@ void pre_auton(void) {
   //ATaskActiv = 1;
    EXIT=false;
   Clamp.set(false);
-  Sorter.set(false);
-  IntakeLift.set(false);
+  Doinker.set(true);
+  IntakeLift.set(true);
   PX=0;
   JX=0;
   AutoSelectorVal=0;
@@ -349,7 +349,7 @@ int XTask(void)
     {
       ButtonPressingY=1;//Button is now pressed
       YTaskActiv=1;//Task is now active
-      
+      Doinker.set(false);
     }
 
     else if(!Controller1.ButtonY.pressing())ButtonPressingY=0;
@@ -358,7 +358,7 @@ int XTask(void)
     {
       ButtonPressingY=1;//Button is now pressed
       YTaskActiv=0;//Task is now NOT running
-      
+      Doinker.set(true);
     }
     //----------------------
       //Toggles Doinky doinker
@@ -367,25 +367,26 @@ int XTask(void)
 
   return 0;
   }
+/*
 int BTask(void)
 {
     while(true)
     {
       //Toggles Tilt
-    if(BTaskActiv==0&&Controller1.ButtonY.pressing()&&ButtonPressingB==0)//Finding if ButtonY is pressing and if it was held down before.
+    if(BTaskActiv==0&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if ButtonY is pressing and if it was held down before.
     {
-      ButtonPressingY=1;//Button is now pressed
+      ButtonPressingB=1;//Button is now pressed
       BTaskActiv=1;//Task is now active
-      IntakeLift.set(true);
+      IntakeLift.set(false);
     }
 
     else if(!Controller1.ButtonB.pressing())ButtonPressingB=0;
 
-    else if(BTaskActiv==1&&Controller1.ButtonY.pressing()&&ButtonPressingB==0)//Finding if task is active and if ButtonX wasn't pressed before
+    else if(BTaskActiv==1&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if task is active and if ButtonX wasn't pressed before
     {
-      ButtonPressingY=0;//Button is now pressed
+      ButtonPressingB=0;//Button is now pressed
       BTaskActiv=0;//Task is now NOT running
-      IntakeLift.set(false);
+      IntakeLift.set(true);
     }
     //----------------------
       //Toggles intake lift
@@ -394,7 +395,37 @@ int BTask(void)
 
   return 0;
   }
+*/
+int BTask(void)
+{
+    while(true)
+    {
+        // Toggles Tilt
+        if (BTaskActiv == 0 && Controller1.ButtonB.pressing() && ButtonPressingB == 0)
+        {
+            // Button is now pressed
+            ButtonPressingB = 1;
+            // Task is now active
+            BTaskActiv = 1;
+            IntakeLift.set(false);
+        }
+        else if (!Controller1.ButtonB.pressing())
+        {
+            ButtonPressingB = 1;
+        }
+        else if (BTaskActiv == 1 && Controller1.ButtonB.pressing() && ButtonPressingB == 0)
+        {
+            // Button is now pressed
+            ButtonPressingB = 0;
+            // Task is now NOT running
+            BTaskActiv = 0;
+            IntakeLift.set(true);
+        }
+        // Toggles intake lift
+    }
 
+    return 0;
+}
 
 
 int ATask(void) {
@@ -403,12 +434,12 @@ int ATask(void) {
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) > 217 ) {
-        RunLift(-100);
+      if(abs(LiftSensor.position(degrees)) > 142 ) {
+        RunLift(100);
       } 
       
-      else if(abs(LiftSensor.position(degrees)) < 217) {
-        RunLift(100);
+      else if(abs(LiftSensor.position(degrees)) < 142) {
+        RunLift(-100);
        
       } 
       else{
@@ -501,13 +532,19 @@ int main() {
   // Run the pre-autonomous function.
   pre_auton();
   wait(100, msec);
-  
+ 
   
   // Prevent main from exiting with an infinite loop.
   while (true) {
-    wait(100, msec);
+    wait(1, sec);
+    RunRoller(-100);
     using std::cout;
     using std::endl;
+    cout << "BTaskActiv below" << endl;
+    cout << BTaskActiv << endl;
+    cout << "Gyro Heading below" << endl;
+    cout << Gyro.angle() << endl;
+    cout << "Macro Angle below" << endl;
     cout << LiftSensor.angle() << endl;
   }
 }

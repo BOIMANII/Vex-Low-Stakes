@@ -13,7 +13,7 @@ extern motor RB;
 extern motor In1;
 extern motor Lift;
 extern digital_out Clamp;
-extern digital_out Sorter;
+extern digital_out Doinker;
 extern digital_out RightBackWing;
 extern digital_out Pistake;
 extern motor PU;

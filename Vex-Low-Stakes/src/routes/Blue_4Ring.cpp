@@ -10,14 +10,16 @@ void Blue_4Ring(){
     //both sides
     //Gyro.setHeading(0,degrees);
     PIDDataSet Test={1.5,0.1,0.15}; //initialize
-    MoveEncoderPID(Test, 70, 30, 0.3, 0, 1);
+    TurnMaxTimePID(Test, 0, 0.2, true);
+    MoveEncoderPID(Test, 75, 35, 0.3, 0, 1);
     wait(250, msec);
     Clamp.set(true);
     wait(750, msec);
-    RunRoller(-100);
+    MoveEncoderPID(Test, 70, 1, 0.2, 0, 0);
+    RunRoller(100);
     wait(500, msec);
-    TurnMaxTimePID(Test, -148, 0.7, 0);
-    MoveEncoderPID(Test, -75, 13, 0.1, -148, 0);
+    TurnMaxTimePID(Test, -90, 0.7, 0);
+    MoveEncoderPID(Test, -75, 13, 0.1, -90, 0);
     wait(250, msec);
     RunRoller(-100);
     wait(400, msec);
