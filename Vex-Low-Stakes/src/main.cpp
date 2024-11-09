@@ -429,9 +429,9 @@ int BTask(void)
 int ATask() {
   // When Button A is pressed, move motor to 90 degrees if not already there
   while (true) {
-    if (Controller1.ButtonA.pressing() && LiftSensor.angle(degrees) != 90) {
-      Lift.startRotateTo(90, rotationUnits::deg);
-      while (Lift.isSpinning) {
+    if (Controller1.ButtonA.pressing() && LiftSensor.angle(degrees) != 135) {
+      Lift.spinToPosition(135, rotationUnits::deg);
+      while (Lift.isSpinning()) {
         // Wait until motor reaches position
       }
     }
@@ -452,18 +452,7 @@ int ATask() {
   return 0;
 }
 
-int main() {
-  // Initialize the sensor
-  LiftSensor.setRotation(0, rotationUnits::deg);
 
-  // Run the motor control task
-  vex::task runMotor(runMotorToPosition);
-
-  // Prevent the main function from exiting
-  while (true) {
-    vex::task::sleep(100);
-  }
-}
 
 /*
 int ATask(void) {
