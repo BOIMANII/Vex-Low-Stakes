@@ -427,20 +427,21 @@ int BTask(void)
     return 0;
 }
 
-
 int ATask(void) {
 
   int pow1 = 0;
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) > 142 ) {
-        RunLift(100);
+
+      if(abs(LiftSensor.position(degrees)) > 135 ) {
+        RunLift(50);
+
       } 
       
-      else if(abs(LiftSensor.position(degrees)) < 142) {
-        RunLift(-100);
-       
+      else if(abs(LiftSensor.position(degrees)) < 145) {
+        RunLift(-50);
+
       } 
       else{
         ATaskActiv=0;

@@ -19,9 +19,9 @@ void Blue_4Ring(){
     MoveEncoderPID(Test, -75, 12.9, 0.2, -147, 0); // drive into center rings
     wait(500, msec);// debug wait
     TurnMaxTimePID(Test, -90, 0.7, 0); // turn to face other ring   
-    MoveEncoderPID(Test, -45, 13, 0.1, -90, 0); // drive into other ring
+    MoveEncoderPID(Test, -45\, 13, 0.1, -90, 0); // drive into other ring
     wait(250, msec);
-    TurnMaxTimePID(Test, 37, 0.7, 0);
+    TurnMaxTimePID(Test, 38, 0.7, 0); // turn to face mid 2 stack
     MoveEncoderPID(Test, -50, 10, 0.2, 40, 0);
     wait(5, sec);
 
