@@ -426,11 +426,12 @@ int BTask(void)
 
     return 0;
 }
+/*ATASK New
 int ATask() {
   // When Button A is pressed, move motor to 90 degrees if not already there
   while (true) {
     if (Controller1.ButtonA.pressing() && LiftSensor.angle(degrees) != 135) {
-      Lift.spinToPosition(135, rotationUnits::deg);
+      Lift.spinToPosition(135,);
       while (Lift.isSpinning()) {
         // Wait until motor reaches position
       }
@@ -451,10 +452,10 @@ int ATask() {
   }
   return 0;
 }
+*/
 
 
-
-/*
+ 
 int ATask(void) {
 
   int pow1 = 0;
@@ -506,7 +507,7 @@ int ATask(void) {
   }
   return 0;
 }
-*/
+
 
 
 /*---------------------------------------------------------------------------*/
@@ -527,7 +528,7 @@ void usercontrol(void) {
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
     
-     
+
     
     task Dtask=task(DriveTask);
     task Atask=task(ATask);

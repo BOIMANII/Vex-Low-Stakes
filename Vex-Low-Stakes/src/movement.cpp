@@ -68,7 +68,11 @@ RF.spin(forward,(double)right/100.0*11,volt);
 RM.spin(forward,(double)right/100.0*11,volt);
 RB.spin(forward,(double)right/100.0*11,volt);
 }
-
+void print(int shit) {
+  using std::cout;
+  using std::endl;
+  cout << shit << endl;
+}
 void BStop()
 {
 LF.setStopping(brake);
