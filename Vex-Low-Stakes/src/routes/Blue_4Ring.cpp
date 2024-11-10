@@ -29,7 +29,7 @@ void Blue_4Ring(){
     TurnMaxTimePID(Test, 0, 0.8, 0); // Turn to face mid 2 stack
     MoveEncoderPID(Test, -50, 9, 0.2, 0, 0); // Dive into 2 stack
     wait(5, sec);
-
+    TurnMaxTimePID(Test, 361, 50, 1);
    
 
  
