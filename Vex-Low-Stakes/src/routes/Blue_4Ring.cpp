@@ -13,16 +13,19 @@ void Blue_4Ring(){
     MoveEncoderPID(Test, 75, 34, 0.3, 0, 1); // move to mogo
     wait(250, msec);
     Clamp.set(true);// clamp mogo
-    wait(750, msec);
+    wait(1500, msec);
     RunRoller(100);//intakepreload, prepare to intake center
-    TurnMaxTimePID(Test, -147, 0.7, 0); // turn to face center rings
-    MoveEncoderPID(Test, -75, 12.9, 0.2, -147, 0); // drive into center rings
-    wait(500, msec);// debug wait
-    TurnMaxTimePID(Test, -90, 0.7, 0); // turn to face other ring   
-    MoveEncoderPID(Test, -45\, 13, 0.1, -90, 0); // drive into other ring
     wait(250, msec);
-    TurnMaxTimePID(Test, 38, 0.7, 0); // turn to face mid 2 stack
-    MoveEncoderPID(Test, -50, 10, 0.2, 40, 0);
+    TurnMaxTimePID(Test, -140, 0.7, 0); // turn to face center rings
+    MoveEncoderPID(Test, -75, 13.1, 0.2, -140, 0); // drive into center rings
+    wait(500, msec);// debug wait
+    MoveEncoderPID(Test, 60, 9, 0.1, -147, 0); // drive back
+    TurnMaxTimePID(Test, -125, 0.7, 0); // turn to face other center ring
+    MoveEncoderPID(Test, -50, 8, 0.2, 50, 0); // dive into other center ring
+    MoveEncoderPID(Test, 50, 5, 0.2, 50, 0); // dive back
+    wait(500, msec);
+    TurnMaxTimePID(Test, 50, 0.8, 0); // turn to face mid 2 stack
+    MoveEncoderPID(Test, -50, 9, 0.2, 50, 0); // dive into 2 stack
     wait(5, sec);
 
    
