@@ -14,22 +14,25 @@ void Blue_4Ring(){
     MoveEncoderPID(Test, 60, 1.5, 0.3, 0, 1); // Move to mogo
     wait(250, msec);
     Clamp.set(true);// Clamp mogo
-    wait(1500, msec);
+    wait(900, msec);
     RunRoller(100);// Intake preload, prepare to intake center
-    wait(250, msec);
+    wait(300, msec);
     TurnMaxTimePID(Test, -140, 0.7, 0); // Turn to face center rings
-    MoveEncoderPID(Test, -75, 13.1, 0.2, -140, 0); // Drive into center rings
-    wait(500, msec);// debug wait
-    MoveEncoderPID(Test, 40, 9, 0.1, -147, 0); // Drive back
-    TurnMaxTimePID(Test, -125, 0.7, 0); // Turn to face other center ring
-    MoveEncoderPID(Test, -50, 9, 0.2, -125, 0); // Dive into other center ring
-    wait(500, msec);//wait for ring to enter
-    MoveEncoderPID(Test, 50, 12, 0.2, 50, 0); // Dive back
-    wait(500, msec);
-    TurnMaxTimePID(Test, 0, 0.8, 0); // Turn to face mid 2 stack
-    MoveEncoderPID(Test, -50, 9, 0.2, 0, 0); // Dive into 2 stack
+    MoveEncoderPID(Test, -75, 16.1, 0.2, -140, 0); // Drive into center rings
+    wait(400, msec);// debug wait
+    MoveEncoderPID(Test, 75, 9, 0.1, -147, 0); // Drive back
+    TurnMaxTimePID(Test, -127, 0.7, 0); // Turn to face other center ring
+    MoveEncoderPID(Test, -60, 12.75, 0.2, -127, 0); // Dive into other center ring
+    wait(600, msec);//wait for ring to enter
+    MoveEncoderPID(Test, 75, 17, 0.2, -126, 0); // Dive back
+    wait(150, msec);
+    TurnMaxTimePID(Test, -83, 0.7, 0); // Turn to face mid 2 stack
+    MoveEncoderPID(Test, -75, 3, 0.2, -83, 0); // Dive into 2 mid stack
+    wait(250, msec);
+    TurnMaxTimePID(Test, -22.15, 0.8, 0); // Turn to face corner
+    MoveEncoderPID(Test, -90, 45, 0.2, -22.15, 0); // Dive into corner
     wait(5, sec);
-    TurnMaxTimePID(Test, 361, 50, 1);
+    //TurnMaxTimePID(Test, 361, 50, 1);
    
 
  
