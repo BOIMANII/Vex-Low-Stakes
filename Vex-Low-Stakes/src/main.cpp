@@ -400,32 +400,29 @@ int BTask(void)
 {
     while(true)
     {
-        // Toggles Tilt
-        if (BTaskActiv == 0 && Controller1.ButtonB.pressing() && ButtonPressingB == 0)
-        {
-            // Button is now pressed
-            ButtonPressingB = 1;
-            // Task is now active
-            BTaskActiv = 1;
-            IntakeLift.set(false);
-        }
-        else if (!Controller1.ButtonB.pressing())
-        {
-            ButtonPressingB = 1;
-        }
-        else if (BTaskActiv == 1 && Controller1.ButtonB.pressing() && ButtonPressingB == 0)
-        {
-            // Button is now pressed
-            ButtonPressingB = 0;
-            // Task is now NOT running
-            BTaskActiv = 0;
-            IntakeLift.set(true);
-        }
-        // Toggles intake lift
+      //Toggles Tilt
+    if(BTaskActiv==0&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if ButtonY is pressing and if it was held down before.
+    {
+      ButtonPressingB=1;//Button is now pressed
+      BTaskActiv=1;//Task is now active
+      IntakeLift.set(false);
     }
 
-    return 0;
-}
+    else if(!Controller1.ButtonB.pressing())ButtonPressingB=0;
+
+    else if(BTaskActiv==1&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if task is active and if ButtonX wasn't pressed before
+    {
+      ButtonPressingB=1;//Button is now pressed
+      BTaskActiv=0;//Task is now NOT running
+      IntakeLift.set(true);
+    }
+    //----------------------
+      //Toggles Doinky doinker
+
+    }
+
+  return 0;
+  }
 /*ATASK New
 int ATask() {
   // When Button A is pressed, move motor to 90 degrees if not already there
