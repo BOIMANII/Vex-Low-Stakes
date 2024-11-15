@@ -10,12 +10,13 @@ void Red_4Ring(){
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
     MoveEncoderPID(Test, 75, 30, 0.3, 0, 1); // Move to mogo v as well
     MoveEncoderPID(Test, 60, 1.5, 0.3, 0, 1); // Move to mogo
-    wait(200, msec);
+    
     Clamp.set(true);// Clamp mogo
-    wait(400, msec);
-    RunRoller(100);// Intake preload, prepare to intake center
-    wait(300, msec);
+    wait(200, msec);
+    
+    
     TurnMaxTimePID(Test, 139.7, 0.7, 0); // Turn to face center rings
+    RunRoller(100);// Intake preload, prepare to intake center
     MoveEncoderPID(Test, -75, 18.3, 0.2, 139.7, 0); // Drive into center rings
     wait(300, msec);// debug wait
     MoveEncoderPID(Test, 75, 9, 0.1, 147, 0); // Drive back
@@ -28,15 +29,15 @@ void Red_4Ring(){
     MoveEncoderPID(Test, -100, 10, 0.2, 79, 0); // Dive into 2 mid stack
     wait(250, msec);
     MoveEncoderPID(Test, 100, 13, 0.2, 81, 0); // Dive back
-    wait(200, msec);
-    TurnMaxTimePID(Test, -35.5, 0.8, 0); // Turn to face 2 stack
+    wait(550, msec);
+    TurnMaxTimePID(Test, -35.65, 0.8, 0); // Turn to face 2 stack
     IntakeLift.set(false); //lift intake
-    MoveEncoderPID(Test, -90, 35.5, 0.2, -35.5, 10); // Dive into 2 stack
-    wait(400, msec);
+    MoveEncoderPID(Test, -90, 35.7, 0.2, -35.65, 10); // Dive into 2 stack
+    wait(500, msec);
     MoveEncoderPID(Test, 100, 18, 0.2, -35.4, 0); // Dive back
     TurnMaxTimePID(Test, 220, 0.8, 0); // Turn to face middle
     RunLift(100);
-    MoveEncoderPID(Test, -50, 1, 0.2, 220, 10); // into middle
+    MoveEncoderPID(Test, -50, 5, 0.2, 220, 10); // into middle
     
     wait(5, sec);
     //TurnMaxTimePID(Test, 361, 50, 1);
