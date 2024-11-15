@@ -453,9 +453,54 @@ int ATask() {
   return 0;
 }
 */
+int ATask (void) {
+int pow1 = 0;
+
+  while(true) {
+    if(ATaskActiv==1) {
+      if(abs(LiftSensor.position(degrees)) < 343) {
+        RunLift(-100);
+        if(abs(LiftSensor.position(degrees)) > 343) {
+          ATaskActiv = 0;
+        }
+      } 
+      else if(abs(LiftSensor.position(degrees)) > 343) {
+        RunLift(100);
+        if(abs(LiftSensor.position(degrees)) < 353) {
+          ATaskActiv = 0;
+        }
+      } 
+    }
+    else {
+      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
+      if(pow1==0) {
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      else {
+        RunLift(pow1);
+      }
+    }
+
+    if(Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+      ButtonPressingA=1;
+      ATaskActiv=1;
+    }
+
+    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
+
+    else if(BTaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
+      ButtonPressingA=1;
+      ATaskActiv=0;
+      RunLift(0);
+    }
 
 
- 
+  }
+  return 0;
+}
+
+/*
 int ATask(void) {
 
   int pow1 = 0;
@@ -463,24 +508,24 @@ int ATask(void) {
   while(true) {
     if(ATaskActiv==1) {
 
-      if(abs(LiftSensor.position(degrees)) > 135 ) {
-        RunLift(50);
+      if(abs(LiftSensor.position(degrees)) > 342 ) {
+        RunLift(100);
 
       } 
       
-      else if(abs(LiftSensor.position(degrees)) < 145) {
-        RunLift(-50);
+      else if(abs(LiftSensor.position(degrees)) < 346) {
+        RunLift(-100);
 
       } 
       else{
         ATaskActiv=0;
-        Lift.setStopping(hold);
+        Lift.setStopping(brake);
         Lift.stop();
       }
       
     }
     else {
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
+      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*70;
       if(pow1==0) {
         Lift.setStopping(hold);
         Lift.stop();
@@ -507,7 +552,7 @@ int ATask(void) {
   }
   return 0;
 }
-
+*/
 
 
 /*---------------------------------------------------------------------------*/
