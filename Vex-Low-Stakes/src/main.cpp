@@ -450,6 +450,7 @@ int ATask() {
   return 0;
 }
 */
+/*
 int ATask (void) {
 int pow1 = 0;
 
@@ -496,7 +497,37 @@ int pow1 = 0;
   }
   return 0;
 }
+*/
+vex::task::sleep(20)
+int ATask(void) {
+  int pow1 = 0;
+  int mvel = 0;
+  int a = 0;
+  while (true) {
+    if (ATaskActiv == 1) {
+      if (abs(LiftSensor.angle()) > a) {
+        mvel = (abs(LiftSensor.angle() - a))*70
+      }
+      else if (abs(LiftSensor.angle()) < a) {
+        ATaskActiv = 0;
+      }
+    }
+    else if (ATaskActiv == 1) {
 
+    }
+    else {
+      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
+      if(pow1==0) {
+        Lift.setStopping(hold);
+        Lift.stop();
+      }
+      else {
+        RunLift(pow1);
+      }
+    }
+  }
+  return 0;
+}
 /*
 int ATask(void) {
 
