@@ -235,22 +235,22 @@ Zeroing(true,true);
 //Put Auto route function into if statements to use autoselector
 if(AutoSelectorVal==1)//Normal
 {
-  Blue_2Ring();
+  Blue_5();
 }
 
 if(AutoSelectorVal==2)// Left side either red/blue
 {
-  Red_2Ring();
+  Red_5();
 }
 
 if(AutoSelectorVal==3)//Risky
 {
-  Blue_4Ring();
+  Blue_5();
 } 
 
 if(AutoSelectorVal==4)// risky AWP
 {
-  Red_4Ring();
+  Red_5();
 }
 
 if(AutoSelectorVal==5)// 
@@ -450,21 +450,21 @@ int ATask() {
   return 0;
 }
 */
-/*
+
 int ATask (void) {
 int pow1 = 0;
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 343) {
+      if(abs(LiftSensor.position(degrees)) < 327) {
         RunLift(-100);
-        if(abs(LiftSensor.position(degrees)) > 343) {
+        if(abs(LiftSensor.position(degrees)) > 327) {
           ATaskActiv = 0;
         }
       } 
-      else if(abs(LiftSensor.position(degrees)) > 343) {
+      else if(abs(LiftSensor.position(degrees)) > 327) {
         RunLift(100);
-        if(abs(LiftSensor.position(degrees)) < 353) {
+        if(abs(LiftSensor.position(degrees)) < 320) {
           ATaskActiv = 0;
         }
       } 
@@ -497,23 +497,26 @@ int pow1 = 0;
   }
   return 0;
 }
-*/
-vex::task::sleep(20)
+
+/*
 int ATask(void) {
   int pow1 = 0;
   int mvel = 0;
-  int a = 0;
+
   while (true) {
     if (ATaskActiv == 1) {
-      if (abs(LiftSensor.angle()) > a) {
-        mvel = (abs(LiftSensor.angle() - a))*70
+      if (abs(LiftSensor.angle()) > 327) {
+        mvel = (abs(LiftSensor.angle() - 327));
+        if (abs(LiftSensor.angle()) < 327) {
+          ATaskActiv = 0;
+        }
       }
-      else if (abs(LiftSensor.angle()) < a) {
-        ATaskActiv = 0;
-      }
+      else if (abs(LiftSensor.angle()) < 327) {
+        mvel = (abs(LiftSensor.angle() - 327));
+        if (abs(LiftSensor.angle()) > 327) {
+          ATaskActiv = 0;
+        }
     }
-    else if (ATaskActiv == 1) {
-
     }
     else {
       pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
@@ -525,9 +528,25 @@ int ATask(void) {
         RunLift(pow1);
       }
     }
+
+  if(Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+      ButtonPressingA=1;
+      ATaskActiv=1;
+    }
+
+    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
+
+    else if(BTaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
+      ButtonPressingA=1;
+      ATaskActiv=0;
+      RunLift(0);
+    }
+
+
   }
   return 0;
 }
+*/
 /*
 int ATask(void) {
 
