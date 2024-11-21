@@ -6,19 +6,20 @@
 // TurnMaxTimePID(TestPara, Desired Heading -180 to 180, time out to calculate turn, Braking?)
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
 
-void AWP(){
+void BAWP(){
     //blue side
     PIDDataSet TestPara={1.5,0.1,0.15}; //initialize
-    wait(0.2, seconds);
-    MoveEncoderPID(TestPara, 60, 36.5, 0.2, 0, true);//Drive to mogo
-    MoveEncoderPID(TestPara, 10, .5, 0.2, 0, true);
-    wait(0.5, seconds);
-    Clamp.set(false);//clamp onto mogo
-    wait(0.5, seconds);
-    TurnMaxTimePID(TestPara, -90, 0.5, false);//turn towards stack
-    RunRoller(-100);
-    wait(0.5, seconds);
-    MoveEncoderPID(TestPara, -60, 36.5, 0.2, Gyro.angle(), true);//Drive to mogo
+    
+}
 
+void RAWP(){
+    //red side
+    PIDDataSet TestPara={1.5,0.1,0.15}; //initialize
+    TurnMaxTimePID(Test, -140, 0.7, 0); // Turn to face allyence steak
+    MoveEncoderPID(Test, 75, 6, 0.2, 139.7, 0); // Drive into allyence steak
+    wait(150, msec);
+    RunLift(100);
+    wait(250, msec);
+    RunLift(-100);
 
 }
