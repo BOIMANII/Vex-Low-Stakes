@@ -245,12 +245,12 @@ if(AutoSelectorVal==2)// Left side either red/blue
 
 if(AutoSelectorVal==3)//Risky
 {
-  Blue_5();
+  BMogo();
 } 
 
 if(AutoSelectorVal==4)// risky AWP
 {
-  Red_5();
+  RMogo();
 }
 
 if(AutoSelectorVal==5)// 
@@ -614,6 +614,9 @@ int ATask(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+  
+
+
 void usercontrol(void) {
   EXIT=true;//Force Exit Autosel once drivercontrol began.
   // User control code here, inside the loop
@@ -621,15 +624,16 @@ void usercontrol(void) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
-    
 
-    
     task Dtask=task(DriveTask);
     task Atask=task(ATask);
     task Xtask=task(XTask);
     task Ytask=task(YTask);    
     task Btask=task(BTask);
     task Itask=task(ITask);
+
+
+ 
     
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
@@ -651,12 +655,13 @@ int main() {
   //LiftSensor.setPosition(-2, degrees);
   LiftSensor.setReversed(true);
   // Set up callbacks for autonomous and driver control periods.
+  
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
   // Run the pre-autonomous function.
   pre_auton();
   wait(100, msec);
- 
+  
   
   // Prevent main from exiting with an infinite loop.
   while (true) {
