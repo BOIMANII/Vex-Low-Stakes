@@ -255,13 +255,13 @@ if(AutoSelectorVal==4)// risky AWP
 
 if(AutoSelectorVal==5)// 
 {
-    //Blue_MogoRush();
+
 }
 
 
 if(AutoSelectorVal==6)//AWP only
 {
-  //Red_MogoRush();
+
 }
 
 
@@ -620,22 +620,21 @@ int ATask(void) {
 void usercontrol(void) {
   EXIT=true;//Force Exit Autosel once drivercontrol began.
   // User control code here, inside the loop
-  while (1) {
+  
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
-
+  
+    
     task Dtask=task(DriveTask);
     task Atask=task(ATask);
     task Xtask=task(XTask);
     task Ytask=task(YTask);    
     task Btask=task(BTask);
     task Itask=task(ITask);
-
-
- 
     
-    // ........................................................................
+    
+    //......................................................
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
     // ........................................................................
@@ -643,7 +642,7 @@ void usercontrol(void) {
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
-}
+
 
 //
 // Main will set up the competition functions and callbacks.
