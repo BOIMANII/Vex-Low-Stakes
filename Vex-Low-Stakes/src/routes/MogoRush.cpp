@@ -8,6 +8,25 @@
 
 void RMogo() {
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
+    RunRoller(100);
+
+    MoveEncoderPID(Test, 50, 5, 0.3, 0, 0);
+    TurnMaxTimePID(Test, 90, 0.3, 0);
+    TurnMaxTimePID(Test, 90, 0.3, 0);
+    MoveEncoderPID(Test, -100, 12, 0.2, 90, 0);
+    MoveEncoderPID(Test, -30, 10, 0.3, 90, 0);
+    TurnMaxTimePID(Test, 0, 0.3, 0);
+    TurnMaxTimePID(Test, 0, 0.3, 0);
+    MoveEncoderPID(Test, -100, 10, 0.3, 0, 0);
+    MoveEncoderPID(Test, -50, 2.5, 0.3, 0, 0);
+    wait(250, msec);
+    RunLift(100);
+    wait(200, msec);
+    MoveEncoderPID(Test, 50, 3, 0.5, 0, 0);
+    RunLift(0);
+    wait(100000, seconds);
+    
+    /*
     MoveEncoderPID(Test, 100, 26, 0.3, 0, 0); // move to mogo
     MoveEncoderPID(Test, 50, 2, 0.2, 0, 0); // move little more
     wait(200, msec);
@@ -29,6 +48,8 @@ void RMogo() {
     wait(500, msec);
     RunRoller(0);
     wait(100, seconds);
+
+    */
 }
 
 void BMogo() {
