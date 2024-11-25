@@ -7,45 +7,48 @@
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
 
 void MogoRushQual() {
-    PIDDataSet TestPara={1.5,0.1,0.15}; //initialize
-    MoveEncoderPID(TestPara, 100, 58, 0.4, 0, true);//Grab mogo rush angled
+    PIDDataSet Test={1.5,0.1,0.15}; //initialize
+    MoveEncoderPID(Test, 100, 58, 0.4, 0, true);//Grab mogo rush angled
     //OPMECH.set(true);
-    MoveEncoderPID(TestPara, -100, 25, 0.4, 0, true );
-    TurnMaxTimePID(TestPara, 30, 0.5, true);
-    MoveEncoderPID(TestPara,-100,  36, 0.4, 30, true);
-    TurnMaxTimePID(TestPara, 120, 0.5, true);
+    MoveEncoderPID(Test, -100, 25, 0.4, 0, true );
+    TurnMaxTimePID(Test, 30, 0.5, true);
+    MoveEncoderPID(Test,-100,  36, 0.4, 30, true);
+    TurnMaxTimePID(Test, 120, 0.5, true);
     //OPMECH.set(false);
    
 
-    MoveEncoderPID(TestPara, -100, 6, 0.4, 120, true);
+    MoveEncoderPID(Test, -100, 6, 0.4, 120, true);
     
-    TurnMaxTimePID(TestPara, -22, 0.7, true);
-    MoveEncoderPID(TestPara, 100, 29, 0.4, -22, false);
+    TurnMaxTimePID(Test, -22, 0.7, true);
+    MoveEncoderPID(Test, 100, 29, 0.4, -22, false);
      //slow down to grab mogo
     Clamp.set(true); //close clamp 
     wait(400,msec);
-    MoveEncoderPID(TestPara, 100, 2, 0.4,-22, true); //move back to let goal sit in
+    MoveEncoderPID(Test, 100, 2, 0.4,-22, true); //move back to let goal sit in
     //Tilt.set(false); // tilt mogo
     wait(100,msec);
-    TurnMaxTimePID(TestPara, -90,  0.6, true);
+    TurnMaxTimePID(Test, -90,  0.6, true);
     Pistake.set(false);
     RunRoller(-100);
 
-    MoveEncoderPID(TestPara, -100, 30, 0.4, -90, true);
+    MoveEncoderPID(Test, -100, 30, 0.4, -90, true);
     wait(1800,msec);
     RunRoller(0);
 
 }
 
-void RedMogoRushQual()
+void RedMogoRush()
 {
-    PIDDataSet TestPara={1.5,0.1,0.15}; //initialize
-    MoveEncoderPID(TestPara, 100, 21.15, 0.4, 0, true);//Grab mogo rush angled
-    Clamp.set(true);
-    MoveEncoderPID(TestPara, 100, -4.3, 0.4,30, true);//peel back to get ready to turn to ring 1
-    RunRoller(-100);
-    TurnMaxTimePID(TestPara, -135, 0.8, true); //turn to face ring 1
-    MoveEncoderPID(TestPara, -100,24, 0.3, -135, true);//Drive to Ring 1  
+    PIDDataSet Test={1.5,0.1,0.15}; //initialize
+    MoveEncoderPID(Test, -50, 1, 0.3, 0, 0); //move too alleynce steak
+    TurnMaxTimePID(Test, 0, 0.3, 0);// turn 0 too alleynce steak
+    TurnMaxTimePID(Test, 0, 0.3, 0);// turn 0 too alleynce steak
+    MoveEncoderPID(Test, -50, 2.5, 0.3, 0, 0); // move intoo alleynce steak
+    wait(250, msec);
+    RunLift(100); // secore unto alleynce steak
+    wait(500, msec);
+    RunLift(-100);
+    MoveEncoderPID(Test, 50, 3, 0.5, 0, 0); // moove bacc form alleynce steak
 
 
 }

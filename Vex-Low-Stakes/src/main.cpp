@@ -47,7 +47,8 @@ void pre_auton(void) {
   SP=false;
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-Gyro.calibrate();
+  Gyro.calibrate();
+  Gyro.setHeading(0, degrees);
 
 //Ensure Robot Launch Position is set before auto proceeds, once plugged into field control,
 //start program and do not temper bot under all circumstances
@@ -245,12 +246,12 @@ if(AutoSelectorVal==2)// Left side either red/blue
 
 if(AutoSelectorVal==3)//Risky
 {
-  Blue_5();
+  BMogo();
 } 
 
 if(AutoSelectorVal==4)// risky AWP
 {
-  Red_5();
+  RMogo();
 }
 
 if(AutoSelectorVal==5)// 
@@ -623,16 +624,15 @@ void usercontrol(void) {
     // values based on feedback from the joysticks.
     
 
-    /*
+
     task Dtask=task(DriveTask);
     task Atask=task(ATask);
     task Xtask=task(XTask);
     task Ytask=task(YTask);    
     task Btask=task(BTask);
     task Itask=task(ITask);
-    */
-    wait(2, seconds);
-    RMogo();
+    
+
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
