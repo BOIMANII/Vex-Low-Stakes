@@ -8,25 +8,25 @@
 
 void RMogo() {
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
-    int t = 0;
+    int t = 1;
     if (t == 1) {
         RunRoller(100); // start roller
 
         MoveEncoderPID(Test, 50, 5, 0.3, 0, 0); //leave line
-        TurnMaxTimePID(Test, 90, 0.3, 0); // turn 90 to move to mogo
-        TurnMaxTimePID(Test, 90, 0.3, 0); // turn 90 to move to mogo
-        MoveEncoderPID(Test, -100, 12, 0.2, 90, 0);
-        MoveEncoderPID(Test, -30, 12, 0.3, 90, 0);
-        TurnMaxTimePID(Test, 0, 0.3, 0);
-        TurnMaxTimePID(Test, 0, 0.3, 0);
-        MoveEncoderPID(Test, -100, 10, 0.3, 0, 0);
-        MoveEncoderPID(Test, -50, 2.5, 0.3, 0, 0);
+        TurnMaxTimePID(Test, 90, 0.3, 0); // turn 90 to move to stake
+        TurnMaxTimePID(Test, 90, 0.3, 0); // turn 90 to move to stake
+        MoveEncoderPID(Test, -100, 12, 0.2, 90, 0); // move to align with stake
+        MoveEncoderPID(Test, -30, 12, 0.3, 90, 0); // slow down to further align
+        TurnMaxTimePID(Test, 0, 0.3, 0); // turn to 0
+        TurnMaxTimePID(Test, 0, 0.3, 0); // turn to face stake
+        MoveEncoderPID(Test, -100, 10, 0.3, 0, 0); // move into stake
+        MoveEncoderPID(Test, -50, 2.5, 0.3, 0, 0); // move/bump into wall
         wait(250, msec);
-        RunLift(100);
+        RunLift(100); // lift wall stake
         wait(500, msec);
-        RunLift(-100);
-        MoveEncoderPID(Test, 50, 3, 0.5, 0, 0);
-        RunLift(0);
+        RunLift(-100); // lowers wall stake
+        MoveEncoderPID(Test, 50, 3, 0.5, 0, 0); // pulls back
+        RunLift(0); // makes sure wall stake isn't running
         TurnMaxTimePID(Test, 37, 0.3, 0);
         TurnMaxTimePID(Test, 37, 0.3, 0);
         MoveEncoderPID(Test, 100, 18, 0.5, 37, 0);
