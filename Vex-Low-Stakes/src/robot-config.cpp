@@ -9,14 +9,14 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
-motor LF = motor(PORT14, ratio6_1, false);
-motor LM = motor(PORT16, ratio6_1, false);
-motor LB = motor(PORT15, ratio6_1, false);; 
-motor RF = motor(PORT13, ratio6_1, true);
-motor RM = motor(PORT17, ratio6_1, true);
-motor RB = motor(PORT11, ratio6_1, true);
-motor Lift = motor(PORT10, ratio36_1, true);
-motor In1 = motor(PORT20, ratio6_1, false);
+motor LF = motor(PORT9, ratio6_1, false);
+motor LM = motor(PORT10,ratio6_1, true);
+motor LB = motor(PORT8, ratio6_1, false);; 
+motor RF = motor(PORT6, ratio6_1, true);
+motor RM = motor(PORT7, ratio6_1, false);
+motor RB = motor(PORT5, ratio6_1, true);
+motor Lift = motor(PORT20, ratio36_1, true);
+motor In1 = motor(PORT1, ratio6_1, false);
 
 
 //Pistons
