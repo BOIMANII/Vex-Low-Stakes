@@ -26,7 +26,7 @@ digital_out IntakeLift = digital_out(Brain.ThreeWirePort.E);
 
 //Gyro and stuff for PID
 inertial Gyro = inertial(PORT12);
-rotation LiftSensor = rotation(PORT6);
+rotation LiftSensor = rotation(PORT18);
 //Naming convention: 
 // Important variables
 const double wheelDiam = 2.75;

@@ -459,15 +459,15 @@ int pow1 = 0;
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 327) {
-        RunLift(-100);
-        if(abs(LiftSensor.position(degrees)) > 327) {
+      if(abs(LiftSensor.position(degrees)) < 315) {
+        RunLift(-50);
+        if(abs(LiftSensor.position(degrees)) > 315) {
           ATaskActiv = 0;
         }
       } 
-      else if(abs(LiftSensor.position(degrees)) > 327) {
-        RunLift(100);
-        if(abs(LiftSensor.position(degrees)) < 320) {
+      else if(abs(LiftSensor.position(degrees)) > 315) {
+        RunLift(50);
+        if(abs(LiftSensor.position(degrees)) < 334) {
           ATaskActiv = 0;
         }
       } 
@@ -651,7 +651,7 @@ void usercontrol(void) {
 int main() {
   // Reset pos below for Macro to function better.
   //LiftSensor.setPosition(-2, degrees);
-  LiftSensor.setReversed(true);
+
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
@@ -662,13 +662,13 @@ int main() {
   
   // Prevent main from exiting with an infinite loop.
   while (true) {
-    wait(1, sec);
+    wait(100, msec);
     using std::cout;
     using std::endl;
-    cout << "Gyro Heading below" << endl;
-    cout << Gyro.angle() << endl;
+    //cout << "Gyro Heading below" << endl;
+    //cout << Gyro.angle() << endl;
     cout << "Macro Angle below" << endl;
-    cout << LiftSensor.angle() << endl;
+    cout << LiftSensor.position(degrees) << endl;
   }
 }
 
