@@ -9,9 +9,11 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
+//Drive Left Side
 motor LF = motor(PORT9, ratio6_1, false);
 motor LM = motor(PORT10,ratio6_1, true);
-motor LB = motor(PORT8, ratio6_1, false);; 
+motor LB = motor(PORT8, ratio6_1, false);
+//Drive Right Side
 motor RF = motor(PORT6, ratio6_1, true);
 motor RM = motor(PORT7, ratio6_1, false);
 motor RB = motor(PORT5, ratio6_1, true);
@@ -25,8 +27,10 @@ digital_out Doinker = digital_out(Brain.ThreeWirePort.G);
 digital_out IntakeLift = digital_out(Brain.ThreeWirePort.E);
 
 //Gyro and stuff for PID
-inertial Gyro = inertial(PORT12);
+inertial Gyro = inertial(PORT19);
 rotation LiftSensor = rotation(PORT18);
+optical Csen = optical(PORT11);
+limit Ring = limit(Brain.ThreeWirePort.F);
 //Naming convention: 
 // Important variables
 const double wheelDiam = 2.75;

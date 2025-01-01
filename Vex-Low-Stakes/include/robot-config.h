@@ -21,7 +21,8 @@ extern inertial Gyro;
 extern digital_out LeftBackWing;
 extern digital_out IntakeLift;
 extern rotation LiftSensor;
-
+extern optical Csen;
+extern limit Ring;
 extern const double wheelDiam;
 extern const double wheelToMotorRatio;
 

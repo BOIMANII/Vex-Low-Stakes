@@ -296,21 +296,31 @@ int DriveTask(void){
 return 0;
 }
 int V;
+int olddegree = 0;
+int dd = 0;
+
 int ITask(void)
 {
   double pow;
-    while(true)
+  pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
+  RunRoller(-pow);
+
+  if (Csen.hue() > 200)
   {
+    if (Ring.value() == 1) {
     pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
     RunRoller(-pow);
-    
-  
-  //RunPuncher((Controller1.ButtonB.pressing())*100);
+    }
+    else if (Ring.value() == 0) {
+      if (Csen.isNearObject() == false) {
+        RunRoller(0);
+        wait(100, msec);
+      }
+    }
   }
   
   return 0;
 }
-
 
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
@@ -370,35 +380,7 @@ int XTask(void)
 
   return 0;
   }
-/*
-int BTask(void)
-{
-    while(true)
-    {
-      //Toggles Tilt
-    if(BTaskActiv==0&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if ButtonY is pressing and if it was held down before.
-    {
-      ButtonPressingB=1;//Button is now pressed
-      BTaskActiv=1;//Task is now active
-      IntakeLift.set(false);
-    }
 
-    else if(!Controller1.ButtonB.pressing())ButtonPressingB=0;
-
-    else if(BTaskActiv==1&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if task is active and if ButtonX wasn't pressed before
-    {
-      ButtonPressingB=0;//Button is now pressed
-      BTaskActiv=0;//Task is now NOT running
-      IntakeLift.set(true);
-    }
-    //----------------------
-      //Toggles intake lift
-
-    }
-
-  return 0;
-  }
-*/
 int BTask(void)
 {
     while(true)
@@ -426,48 +408,22 @@ int BTask(void)
 
   return 0;
   }
-/*ATASK New
-int ATask() {
-  // When Button A is pressed, move motor to 90 degrees if not already there
-  while (true) {
-    if (Controller1.ButtonA.pressing() && LiftSensor.angle(degrees) != 135) {
-      Lift.spinToPosition(135,);
-      while (Lift.isSpinning()) {
-        // Wait until motor reaches position
-      }
-    }
 
-    // Manual control with L1 and L2
-    if (Controller1.ButtonL1.pressing()) {
-      RunLift(100); // Normal operation
-    } else if (Controller1.ButtonL2.pressing()) {
-      RunLift(-100); // Reverse operation
-    } else {
-      RunLift(0);
-      Lift.setBrake(hold);
-    }
-
-    // Add a small delay to prevent the loop from running too fast
-    vex::task::sleep(20);
-  }
-  return 0;
-}
-*/
 
 int ATask (void) {
 int pow1 = 0;
 
   while(true) {
     if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 315) {
+      if(abs(LiftSensor.position(degrees)) < 324) {
         RunLift(-50);
-        if(abs(LiftSensor.position(degrees)) > 315) {
+        if(abs(LiftSensor.position(degrees)) > 324) {
           ATaskActiv = 0;
         }
       } 
-      else if(abs(LiftSensor.position(degrees)) > 315) {
+      else if(abs(LiftSensor.position(degrees)) > 324) {
         RunLift(50);
-        if(abs(LiftSensor.position(degrees)) < 334) {
+        if(abs(LiftSensor.position(degrees)) < 342) {
           ATaskActiv = 0;
         }
       } 
@@ -658,17 +614,22 @@ int main() {
   // Run the pre-autonomous function.
   pre_auton();
   wait(100, msec);
- 
+  
   
   // Prevent main from exiting with an infinite loop.
   while (true) {
+    Csen.setLight(ledState::on);
     wait(100, msec);
     using std::cout;
     using std::endl;
-    //cout << "Gyro Heading below" << endl;
-    //cout << Gyro.angle() << endl;
+    cout << "Hue" << endl;
+    cout << Csen.hue() << endl;
     cout << "Macro Angle below" << endl;
     cout << LiftSensor.position(degrees) << endl;
+    cout << "Press" << endl;
+    cout << Ring.value() << endl;
+    cout << "Desired Degrees" << endl;
+    cout << dd << endl;
   }
 }
 
