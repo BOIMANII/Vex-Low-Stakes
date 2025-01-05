@@ -1,5 +1,54 @@
 #include "screen_gui.hpp"
 #include "vex.h"
+void DisplayColors(void) {
+  Brain.Screen.clearScreen();
+  Brain.Screen.setCursor(3, 3);
+  Brain.Screen.setPenColor("#3E92CC");
+  Brain.Screen.print("Blue");
+  
+
+  Brain.Screen.setCursor(3, 10);
+  Brain.Screen.setPenColor("#FF1B1C");
+  Brain.Screen.print("Red");
+
+
+  Brain.Screen.setCursor(3, 15);
+  Brain.Screen.setPenColor("#ffffff");
+  Brain.Screen.print("Confirm");
+
+  //Selection Below
+
+  while(true) {
+    if (Brain.Screen.yPosition() > 6 && Brain.Screen.yPosition() < 9) {
+
+      if(Brain.Screen.xPosition() > 0 && Brain.Screen.xPosition() < 6) {
+        Brain.Screen.setCursor(6, 10);
+        Brain.Screen.print("Blue");
+        if (Brain.Screen.pressing() == true){
+        RingColor = 1;
+        }
+      }
+
+      else if(Brain.Screen.xPosition() > 7 && Brain.Screen.xPosition() < 13) {
+        Brain.Screen.setCursor(6, 10);
+        Brain.Screen.print("Red");
+        if (Brain.Screen.pressing() == true){
+        RingColor = 2;
+        }
+      }
+      else if(Brain.Screen.xPosition() > 12 && Brain.Screen.xPosition() < 18) {
+        Brain.Screen.setCursor(6, 10);
+        Brain.Screen.print("COnFIRMED");
+        if (Brain.Screen.pressing() == true){
+        false;
+        }
+      }
+  }
+
+
+
+}
+}
 
 void DisplayAutoSelector(void)
 {
@@ -74,7 +123,7 @@ void DisplayWords(void)
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
 int AutoSelectorVal;
-
+int RingColor = 0;
 void UpdateDynamic(void)
 {
   DisplayAutoSelector();

@@ -51,7 +51,15 @@ void Red_5(){
 
 void Blue_5(){
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
-    MoveEncoderPID(Test, 75, 30, 0.3, 0, 1); // Move to mogo v as well
+    turninverse = 1;
+    TurnMaxTimePID(Test, -45, 0.7, 0); 
+
+
+
+
+
+    /*
+    MoveEncoderPID(Test, 75, 38, 0.3, 0, 1); // Move to mogo v as well
     MoveEncoderPID(Test, 60, 1.5, 0.3, 0, 1); // Move to mogo
     
     Clamp.set(true);// Clamp mogo
@@ -59,7 +67,7 @@ void Blue_5(){
     
     
     TurnMaxTimePID(Test, -139.7, 0.7, 0); // Turn to face center rings
-    RunRoller(100);// Intake preload, prepare to intake center
+    RunRoller(-100);// Intake preload, prepare to intake center
     MoveEncoderPID(Test, -75, 21, 0.2, -139.7, 0); // Drive into center rings
     wait(300, msec);// debug wait
     MoveEncoderPID(Test, 75, 10, 0.1, -147, 0); // Drive back
@@ -80,14 +88,11 @@ void Blue_5(){
     MoveEncoderPID(Test, 100, 18, 0.2, 35.4, 0); // Dive back
     IntakeLift.set(true); //lift intake
     TurnMaxTimePID(Test, -220, 0.8, 0); // Turn to face middle
-    RunLift(100);
+    RunLift(-100);
     MoveEncoderPID(Test, -50, 5, 0.2, -220, 10); // into middle
     
     wait(5, sec);
-    
-
-
-    /*
+       
     MoveEncoderPID(Test, 100, 6, 0.2, -81, 0); // Dive back
     wait(100, msec);
     TurnMaxTimePID(Test, 42, 0.8, 0); // Turn to face 2 stack
@@ -101,7 +106,7 @@ void Blue_5(){
     RunLift(100);
     MoveEncoderPID(Test, -50, 6, 0.2, -220, 10); // into middle
     
+    
+    
     */
-    
-    
 }

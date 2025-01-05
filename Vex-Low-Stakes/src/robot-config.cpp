@@ -33,7 +33,7 @@ optical Csen = optical(PORT11);
 limit Ring = limit(Brain.ThreeWirePort.F);
 //Naming convention: 
 // Important variables
-const double wheelDiam = 2.75;
+const double wheelDiam = 3.25;
 const double wheelToMotorRatio = 48.0/36;
 
 // VEXcode generated functions

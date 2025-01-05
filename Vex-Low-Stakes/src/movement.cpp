@@ -37,7 +37,9 @@ void Zeroing(bool dist, bool HDG)
   }
   if(HDG){
     Gyro.setHeading(0,degrees);
+    LiftSensor.resetPosition();
   }
+
 }
 
 ChassisDataSet ChassisUpdate()

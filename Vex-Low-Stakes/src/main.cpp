@@ -49,6 +49,7 @@ void pre_auton(void) {
   vexcodeInit();
   Gyro.calibrate();
   Gyro.setHeading(0, degrees);
+  
 
 //Ensure Robot Launch Position is set before auto proceeds, once plugged into field control,
 //start program and do not temper bot under all circumstances
@@ -68,7 +69,10 @@ Brain.Screen.print("FLIR TIMEOUT");
 
 waitUntil(!Gyro.isCalibrating());
 
+//DisplayColors();
 
+
+//waitUntil(not RingColor == 0);
 Zeroing(true,true);
 DisplayAutoSelector();
 DisplayWords();
@@ -299,7 +303,8 @@ int V;
 int olddegree = 0;
 int dd = 0;
 
-int ITask(void)
+/*int ITask(void)
+
 {
   double pow;
   pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
@@ -307,21 +312,30 @@ int ITask(void)
 
   if (Csen.hue() > 200)
   {
+
     if (Ring.value() == 1) {
     pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
+    pow= pow*0.7;
     RunRoller(-pow);
     }
     else if (Ring.value() == 0) {
       if (Csen.isNearObject() == false) {
-        RunRoller(0);
+        wait(100, msec);
+        RunRoller(1);
         wait(100, msec);
       }
     }
   }
-  
   return 0;
 }
+*/
 
+int ITask(void) {
+  double pow;
+  pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
+  RunRoller(-pow);
+  return 0;
+}
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
 int ButtonPressingA,ATaskActiv;
@@ -457,108 +471,6 @@ int pow1 = 0;
   return 0;
 }
 
-/*
-int ATask(void) {
-  int pow1 = 0;
-  int mvel = 0;
-
-  while (true) {
-    if (ATaskActiv == 1) {
-      if (abs(LiftSensor.angle()) > 327) {
-        mvel = (abs(LiftSensor.angle() - 327));
-        if (abs(LiftSensor.angle()) < 327) {
-          ATaskActiv = 0;
-        }
-      }
-      else if (abs(LiftSensor.angle()) < 327) {
-        mvel = (abs(LiftSensor.angle() - 327));
-        if (abs(LiftSensor.angle()) > 327) {
-          ATaskActiv = 0;
-        }
-    }
-    }
-    else {
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-    }
-
-  if(Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
-      ButtonPressingA=1;
-      ATaskActiv=1;
-    }
-
-    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
-
-    else if(BTaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
-      ButtonPressingA=1;
-      ATaskActiv=0;
-      RunLift(0);
-    }
-
-
-  }
-  return 0;
-}
-*/
-/*
-int ATask(void) {
-
-  int pow1 = 0;
-
-  while(true) {
-    if(ATaskActiv==1) {
-
-      if(abs(LiftSensor.position(degrees)) > 342 ) {
-        RunLift(100);
-
-      } 
-      
-      else if(abs(LiftSensor.position(degrees)) < 346) {
-        RunLift(-100);
-
-      } 
-      else{
-        ATaskActiv=0;
-        Lift.setStopping(brake);
-        Lift.stop();
-      }
-      
-    }
-    else {
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*70;
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-    }
-
-    if(ATaskActiv==0&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
-      ButtonPressingA=1;
-      ATaskActiv=1;
-    }
-
-    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
-
-    else if(ATaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
-      ButtonPressingA=1;
-      ATaskActiv=0;
-      //RunLift(0);
-    }
-
-
-  }
-  return 0;
-}
-*/
 
 
 /*---------------------------------------------------------------------------*/
@@ -587,7 +499,7 @@ void usercontrol(void) {
     task Ytask=task(YTask);    
     task Btask=task(BTask);
     task Itask=task(ITask);
-    
+
 
     // ........................................................................
     // Insert user code here. This is where you use the joystick values to
@@ -614,12 +526,12 @@ int main() {
   // Run the pre-autonomous function.
   pre_auton();
   wait(100, msec);
-  
+  wait(5, seconds);
+  Blue_5();
   
   // Prevent main from exiting with an infinite loop.
   while (true) {
     Csen.setLight(ledState::on);
-    wait(100, msec);
     using std::cout;
     using std::endl;
     cout << "Hue" << endl;
@@ -630,7 +542,13 @@ int main() {
     cout << Ring.value() << endl;
     cout << "Desired Degrees" << endl;
     cout << dd << endl;
-  }
+    cout << "Gyro" << endl;
+    cout << Gyro.angle() << endl;
+    
+    //--------------------------------------------------------------------------------
+
+
+}
 }
 
   // copy of macro so if i break it i still have a backup 

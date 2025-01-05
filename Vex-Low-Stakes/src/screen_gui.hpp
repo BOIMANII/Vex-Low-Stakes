@@ -2,7 +2,9 @@
 #define SCREEN_GUI_H
 
 extern int AutoSelectorVal;
+extern int RingColor;
 
+extern void DisplayColors();
 extern void DisplayAutoSelector();
 extern void DisplayWords();
 extern void UpdateDynamic();
