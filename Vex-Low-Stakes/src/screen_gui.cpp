@@ -18,7 +18,7 @@ void DisplayColors(void) {
 
   //Selection Below
 
-  while(true) {
+  while(int q = 0) {
     if (Brain.Screen.yPosition() > 6 && Brain.Screen.yPosition() < 9) {
 
       if(Brain.Screen.xPosition() > 0 && Brain.Screen.xPosition() < 6) {
@@ -38,9 +38,9 @@ void DisplayColors(void) {
       }
       else if(Brain.Screen.xPosition() > 12 && Brain.Screen.xPosition() < 18) {
         Brain.Screen.setCursor(6, 10);
-        Brain.Screen.print("COnFIRMED");
+        Brain.Screen.print("CONFIRMED");
         if (Brain.Screen.pressing() == true){
-        false;
+        q = 1;
         }
       }
   }

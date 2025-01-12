@@ -13,4 +13,5 @@ extern void RMogo();
 extern void BMogo();
 extern void RAWP();
 extern void BRAWP();
+extern void Skills();
 #endif

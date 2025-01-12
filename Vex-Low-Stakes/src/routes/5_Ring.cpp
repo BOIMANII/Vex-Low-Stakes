@@ -1,6 +1,7 @@
 #include "../movement.hpp"
 #include "../helper_functions.hpp"
 #include "vex.h"
+\
 //PID Straight and turn arguments:
 // MoveEncoderPID(TestPara, motor speed, encoder travel distance (inches), time to full speed(sec), relative heading(to starting position), braking?)
 // TurnMaxTimePID(TestPara, Desired Heading -180 to 180, time out to calculate turn, Braking?)
@@ -8,7 +9,10 @@
 
 void Red_5(){
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
-    
+    TurnMaxTimePID(Test, 60, 0.7, 0);
+    MoveEncoderPID(Test, 75, 5, 0.2, 60, 0);
+
+    /*
     MoveEncoderPID(Test, 75, 30, 0.3, 0, 1); // Move to mogo v as well
     MoveEncoderPID(Test, 60, 1.5, 0.3, 0, 1); // Move to mogo
     
@@ -43,7 +47,7 @@ void Red_5(){
     
     wait(5, sec);
     //TurnMaxTimePID(Test, 361, 50, 1);
-   
+    */
 
  
     
@@ -52,7 +56,14 @@ void Red_5(){
 void Blue_5(){
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
     turninverse = 1;
-    TurnMaxTimePID(Test, -45, 0.7, 0); 
+    TurnMaxTimePID(Test, -32, 0.7, 0); 
+    RunLift(100);
+    wait(500, msec);
+    RunLift(-100);
+    MoveEncoderPID(Test, 50, 10, 0.2, -32, 0);
+    wait(500, msec);
+    RunLift(0);
+    
 
 
 

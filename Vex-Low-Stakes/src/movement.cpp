@@ -37,7 +37,6 @@ void Zeroing(bool dist, bool HDG)
   }
   if(HDG){
     Gyro.setHeading(0,degrees);
-    LiftSensor.resetPosition();
   }
 
 }
@@ -109,7 +108,22 @@ RM.stop();
 RB.stop();
 }
 
-
+void Macro(int MacroEn){
+  while(MacroEn==1) {
+      if(abs(LiftSensor.position(degrees)) < 324) {
+        RunLift(-50);
+        if(abs(LiftSensor.position(degrees)) > 324) {
+          MacroEn = 0;
+        }
+      } 
+      else if(abs(LiftSensor.position(degrees)) > 324) {
+        RunLift(50);
+        if(abs(LiftSensor.position(degrees)) < 342) {
+          MacroEn = 0;
+        }
+      } 
+    }
+}
 
 
 void RunRoller(int val)

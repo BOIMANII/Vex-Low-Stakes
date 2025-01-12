@@ -26,6 +26,7 @@ extern ChassisDataSet ChassisUpdate();
 extern void Move(int left, int right);
 extern void BStop();
 extern void CStop();
+extern void Macro(int MacroEn);
 extern void RunRoller(int val);
 extern void RunLift(int val);
 extern void MoveEncoderPID(PIDDataSet KVals, int Speed, double dist,double AccT, double ABSHDG,bool brake);

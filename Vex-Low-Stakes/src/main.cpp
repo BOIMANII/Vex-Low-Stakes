@@ -39,7 +39,7 @@ void pre_auton(void) {
   //ATaskActiv = 1;
    EXIT=false;
   Clamp.set(false);
-  Doinker.set(true);
+  Doinker.set(false);
   IntakeLift.set(true);
   PX=0;
   JX=0;
@@ -272,7 +272,7 @@ if(AutoSelectorVal==6)//AWP only
 
 if(AutoSelectorVal==7)//temporary prog skills
 { 
- 
+ Skills();
 
 }
 //MoveTimePID(TestPara, -100, 0.5,0.1,-40,true);//score 2nd triball
@@ -303,39 +303,50 @@ int V;
 int olddegree = 0;
 int dd = 0;
 
-/*int ITask(void)
+
+int CurrentDegree = 0;
+int CurrentDegree2 = 0;
+int ITask(void)
 
 {
   double pow;
+  
   pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
   RunRoller(-pow);
 
-  if (Csen.hue() > 200)
-  {
-
-    if (Ring.value() == 1) {
-    pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
-    pow= pow*0.7;
-    RunRoller(-pow);
-    }
-    else if (Ring.value() == 0) {
-      if (Csen.isNearObject() == false) {
-        wait(100, msec);
-        RunRoller(1);
-        wait(100, msec);
+  if(Csen.color() == 255) {
+    CurrentDegree = In1.position(degrees) + 5;
+    while (In1.position(degrees) < CurrentDegree) {
+      RunRoller(-100);
+      CurrentDegree2 = In1.position(degrees) + 10;
+      if (In1.position(degrees) >= CurrentDegree) {
+        while(In1.position(degrees) > CurrentDegree2) {
+          RunRoller(25);
+        }
+        
+        
       }
     }
+
+    
+
+
   }
+  return 0;
+}
+
+
+
+/*
+int ITask(void) {
+
+  double pow;
+  pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
+  RunRoller(-pow);
   return 0;
 }
 */
 
-int ITask(void) {
-  double pow;
-  pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
-  RunRoller(-pow);
-  return 0;
-}
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
 int ButtonPressingA,ATaskActiv;
@@ -525,23 +536,27 @@ int main() {
   Competition.drivercontrol(usercontrol);
   // Run the pre-autonomous function.
   pre_auton();
-  wait(100, msec);
-  wait(5, seconds);
-  Blue_5();
+
   
   // Prevent main from exiting with an infinite loop.
   while (true) {
     Csen.setLight(ledState::on);
+  
     using std::cout;
     using std::endl;
+    wait(200, msec);
     cout << "Hue" << endl;
     cout << Csen.hue() << endl;
     cout << "Macro Angle below" << endl;
     cout << LiftSensor.position(degrees) << endl;
     cout << "Press" << endl;
-    cout << Ring.value() << endl;
-    cout << "Desired Degrees" << endl;
-    cout << dd << endl;
+    cout << Csen.isNearObject() << endl;
+    cout << "Color" << endl;
+    cout << Csen.color() << endl;
+    cout << "Desired" << endl;
+    cout << CurrentDegree << endl;
+    cout << "Current" << endl;
+    cout << In1.position(degrees) << endl;
     cout << "Gyro" << endl;
     cout << Gyro.angle() << endl;
     
