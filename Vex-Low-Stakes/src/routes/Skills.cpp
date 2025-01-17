@@ -34,7 +34,11 @@ void Skills() {
         MoveEncoderPID(Test, -70, 2, 0.2, 90, 0); // move to wall steak
         MoveEncoderPID(Test, -30, 1.5, 0.3, 90, 1); // Move to wall steak
         wait(500, msec);
+        RunRoller(1);
         RunLift(50);
         wait(500, msec);
         RunLift(-50);
+        wait(500, msec);
+        RunLift(0);
+        RunRoller(-100);
 }
