@@ -108,7 +108,7 @@ void DisplayWords(void)
   Brain.Screen.print("Blue_S_AWP");
 
       Brain.Screen.setCursor(11,22);
-  Brain.Screen.print("Skills");
+  Brain.Screen.print("skills");
 }
 
 // define your global instances of motors and other devices here
@@ -235,15 +235,15 @@ Brain.Screen.setFont(monoM);
 if(AutoSelectorVal==7){
   Brain.Screen.drawRectangle(187,175,100,50);
   Brain.Screen.setCursor(11,22);
-  Brain.Screen.print("Skills");
+  Brain.Screen.print("skill");
 
 Brain.Screen.setFillColor(black);
       Brain.Screen.setFont(monoXL);
 Brain.Screen.setPenColor("#f8b195");
 Brain.Screen.setCursor(3,10);
-Brain.Screen.print("SKILLS");
+Brain.Screen.print("skill");
 Brain.Screen.setCursor(4,10);
-Brain.Screen.print("SKILLS");
+Brain.Screen.print("skill");
 Brain.Screen.setFont(monoM); 
   Brain.Screen.setFillColor("#f8b195");
 

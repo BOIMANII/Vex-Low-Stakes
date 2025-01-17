@@ -111,7 +111,7 @@ if(AutoSelectorVal==1){
 Brain.Screen.setFont(monoXL);
 Brain.Screen.setPenColor("#f8b195");
 Brain.Screen.setCursor(3,10);
-Brain.Screen.print("AWP");
+Brain.Screen.print("skill");
 Brain.Screen.setCursor(4,10);
 Brain.Screen.print("Risky");
 Brain.Screen.setFont(monoM);
@@ -195,7 +195,7 @@ Brain.Screen.setFillColor(black);
 Brain.Screen.setFont(monoXL);
 Brain.Screen.setPenColor("#f8b195");
 Brain.Screen.setCursor(3,10);
-Brain.Screen.print("SKILLS");
+Brain.Screen.print("xu");
 Brain.Screen.setCursor(4,10);
 Brain.Screen.print("SKILLS");
 Brain.Screen.setFont(monoM); 
@@ -214,6 +214,7 @@ Brain.Screen.print("AUTO CONFIRMED");
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
+
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */

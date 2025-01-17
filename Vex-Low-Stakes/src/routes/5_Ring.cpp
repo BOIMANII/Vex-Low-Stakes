@@ -54,15 +54,24 @@ void Red_5(){
 }
 
 void Blue_5(){
-    PIDDataSet Test={1.5,0.1,0.15}; // Initialize
-    turninverse = 1;
-    TurnMaxTimePID(Test, -32, 0.7, 0); 
-    RunLift(100);
+PIDDataSet Test={1.5,0.1,0.15}; // Initialize
+    RunLift(100); // secore unto alleynce steak
     wait(500, msec);
     RunLift(-100);
-    MoveEncoderPID(Test, 50, 10, 0.2, -32, 0);
-    wait(500, msec);
+    MoveEncoderPID(Test, 50, 5, 0.3, 0, 0); //leave line
+    MoveEncoderPID(Test, 50, 5, 0.3, 0, 0); //leave line
     RunLift(0);
+    TurnMaxTimePID(Test, 43, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, 43, 0.2, 0); // turn to face ring stack
+    IntakeLift.set(true);
+    RunRoller(100); // start roller
+    MoveEncoderPID(Test, -50, 15, 0.3, 43, 0); //intake top ring 
+    MoveEncoderPID(Test, -50, 15, 0.3, 43, 0); //intake top ring
+    MoveEncoderPID(Test, 50, 5, 0.3, 43, 0); //intake top ring 
+    RunRoller(0); // stop roller 
+    MoveEncoderPID(Test, 50, 10, 0.3, 43, 0); //intake top ring
+    TurnMaxTimePID(Test, -50, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, -50, 0.2, 0); // turn to face ring stack
     
 
 

@@ -28,7 +28,7 @@ void Skills() {
         TurnMaxTimePID(Test, 45, 0.2, 0); // turn to face line
         MoveEncoderPID(Test, -90, 45, 0.2, 45, 0); // move to line
         MoveEncoderPID(Test, -30, 13, 0.3, 45, 1); // Move to line
-        
+
         TurnMaxTimePID(Test, 90, 0.2, 0); // turn to face wall steak
         TurnMaxTimePID(Test, 90, 0.2, 0); // turn to face wall steak
         MoveEncoderPID(Test, -70, 2, 0.2, 90, 0); // move to wall steak
