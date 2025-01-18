@@ -40,7 +40,7 @@ void pre_auton(void) {
    EXIT=false;
   Clamp.set(false);
   Doinker.set(false);
-  IntakeLift.set(true);
+  IntakeLift.set(false);
   PX=0;
   JX=0;
   AutoSelectorVal=0;

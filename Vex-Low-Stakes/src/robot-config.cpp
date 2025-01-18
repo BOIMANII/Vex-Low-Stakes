@@ -23,8 +23,8 @@ motor In1 = motor(PORT1, ratio6_1, false);
 
 //Pistons
 digital_out Clamp = digital_out(Brain.ThreeWirePort.H);
-digital_out Doinker = digital_out(Brain.ThreeWirePort.G);
-digital_out IntakeLift = digital_out(Brain.ThreeWirePort.E);
+digital_out Doinker = digital_out(Brain.ThreeWirePort.E);
+digital_out IntakeLift = digital_out(Brain.ThreeWirePort.G);
 
 //Gyro and stuff for PID
 inertial Gyro = inertial(PORT19);

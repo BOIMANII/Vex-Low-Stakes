@@ -7,12 +7,44 @@
 // TurnMaxTimePID(TestPara, Desired Heading -180 to 180, time out to calculate turn, Braking?)
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
 
-void Red_5(){
+void Red_5(){wait(250, msec);
     PIDDataSet Test={1.5,0.1,0.15}; // Initialize
-    TurnMaxTimePID(Test, 60, 0.7, 0);
-    MoveEncoderPID(Test, 75, 5, 0.2, 60, 0);
+    RunLift(110); // secore unto alleynce steak
+    wait(600, msec);
+    RunLift(-100);
+    MoveEncoderPID(Test, 50, 4, 0.3, 0, 0); //leave line
+    TurnMaxTimePID(Test, 60, 0.2, 0); // turn to mogo
+    TurnMaxTimePID(Test, 60, 0.2, 0); // turn to mogo
+    RunLift(0);
+    MoveEncoderPID(Test, 100, 25, 0.3, 60, 0); //move to mogo
+    MoveEncoderPID(Test, 50, 3, 0.3, 60, 0); // move/bump into mogo
+    wait(400, msec);
+    Clamp.set(true);
+    wait(250, msec);
+    RunRoller(-100); // start roller
+    TurnMaxTimePID(Test, 150, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, 150, 0.2, 0); // turn to face ring stack
+    MoveEncoderPID(Test, -60, 11, 0.3, 150, 0); //intake ring
+    wait(250, msec);
+    MoveEncoderPID(Test, 60, 3, 0.3, 150, 0); //intake ring
+    TurnMaxTimePID(Test, 0, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, 0, 0.2, 0); // turn to face ring stack
+    RunLift(100);
+    wait(250, msec);
+    RunLift(0);
+    MoveEncoderPID(Test, 60, 2, 0.3, 150, 0); //intake ring
 
-    /*
+    /* middle rings:
+    TurnMaxTimePID(Test, 210, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, 210, 0.2, 0); // turn to face ring stack
+    
+    MoveEncoderPID(Test, -100, 12, 0.3, 190, 0); //move to rings
+    MoveEncoderPID(Test, -50, 3, 0.3, 190, 0); // move to rings
+    TurnMaxTimePID(Test, 143, 0.2, 0); // turn to face other ring
+    TurnMaxTimePID(Test, 143, 0.2, 0); // 
+    MoveEncoderPID(Test, -100, 12, 0.2, 155, 0); //intake rings
+    wait(250, msec);
+
     MoveEncoderPID(Test, 75, 30, 0.3, 0, 1); // Move to mogo v as well
     MoveEncoderPID(Test, 60, 1.5, 0.3, 0, 1); // Move to mogo
     
@@ -54,24 +86,25 @@ void Red_5(){
 }
 
 void Blue_5(){
-PIDDataSet Test={1.5,0.1,0.15}; // Initialize
-    RunLift(100); // secore unto alleynce steak
-    wait(500, msec);
+    PIDDataSet Test={1.5,0.1,0.15}; // Initialize
+    RunLift(110); // secore unto alleynce steak
+    wait(600, msec);
     RunLift(-100);
-    MoveEncoderPID(Test, 50, 5, 0.3, 0, 0); //leave line
-    MoveEncoderPID(Test, 50, 5, 0.3, 0, 0); //leave line
+    MoveEncoderPID(Test, 50, 4, 0.3, 0, 0); //leave line
+    TurnMaxTimePID(Test, -60, 0.2, 0); // turn to mogo
+    TurnMaxTimePID(Test, -60, 0.2, 0); // turn to mogo
     RunLift(0);
-    TurnMaxTimePID(Test, 43, 0.2, 0); // turn to face ring stack
-    TurnMaxTimePID(Test, 43, 0.2, 0); // turn to face ring stack
-    IntakeLift.set(true);
-    RunRoller(100); // start roller
-    MoveEncoderPID(Test, -50, 15, 0.3, 43, 0); //intake top ring 
-    MoveEncoderPID(Test, -50, 15, 0.3, 43, 0); //intake top ring
-    MoveEncoderPID(Test, 50, 5, 0.3, 43, 0); //intake top ring 
-    RunRoller(0); // stop roller 
-    MoveEncoderPID(Test, 50, 10, 0.3, 43, 0); //intake top ring
-    TurnMaxTimePID(Test, -50, 0.2, 0); // turn to face ring stack
-    TurnMaxTimePID(Test, -50, 0.2, 0); // turn to face ring stack
+    MoveEncoderPID(Test, 100, 25, 0.3, -60, 0); //move to mogo
+    MoveEncoderPID(Test, 50, 3, 0.3, -60, 0); // move/bump into mogo
+    wait(400, msec);
+    Clamp.set(true);
+    wait(250, msec);
+    RunRoller(-100); // start roller
+    TurnMaxTimePID(Test, -150, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, -150, 0.2, 0); // turn to face ring stack
+    MoveEncoderPID(Test, -60, 11, 0.3, -150, 0); //intake ring
+    wait(250, msec);
+    MoveEncoderPID(Test, 60, 3, 0.3, -150, 0); //intake ring
     
 
 
