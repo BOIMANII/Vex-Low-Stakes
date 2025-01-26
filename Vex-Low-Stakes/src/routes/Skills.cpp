@@ -1,15 +1,22 @@
 #include "../movement.hpp"
 #include "../helper_functions.hpp"
 #include "vex.h"
-\
 //PID Straight and turn arguments:
 // MoveEncoderPID(TestPara, motor speed, encoder travel distance (inches), time to full speed(sec), relative heading(to starting position), braking?)
 // TurnMaxTimePID(TestPara, Desired Heading -180 to 180, time out to calculate turn, Braking?)
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
-
-void Skills() {
-    //red side
-    PIDDataSet Test={1.5,0.1,0.15}; //initialize
+// are we cooked? are we cooking?
+/*
+    while (fabs(LiftSensor.position(degrees)) < 19)//marco
+        RunLift(40);
+    Lift.setStopping(hold);
+    Lift.stop();
+*/
+void Skills(){
+        /*
+        Zeroing(true,true);
+        LiftSensor.setPosition(359.9, degrees);
+        PIDDataSet Test={1.5,0.1,0.15};
         RunRoller(-100);
         wait(250, msec);
         MoveEncoderPID(Test, -70, 10.4, 0.2, 0, 0); // move forward
@@ -34,11 +41,11 @@ void Skills() {
         MoveEncoderPID(Test, -70, 2, 0.2, 90, 0); // move to wall steak
         MoveEncoderPID(Test, -30, 1.5, 0.3, 90, 1); // Move to wall steak
         wait(500, msec);
-        RunRoller(1);
-        RunLift(50);
+        Macro();
         wait(500, msec);
         RunLift(-50);
         wait(500, msec);
         RunLift(0);
         RunRoller(-100);
+        */
 }

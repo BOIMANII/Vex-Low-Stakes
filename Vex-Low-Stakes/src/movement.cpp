@@ -108,23 +108,22 @@ RM.stop();
 RB.stop();
 }
 
-void Macro(int MacroEn){
-  while(MacroEn==1) {
+void Macro(){
+  while (true) {
       if(abs(LiftSensor.position(degrees)) < 324) {
         RunLift(-50);
         if(abs(LiftSensor.position(degrees)) > 324) {
-          MacroEn = 0;
+          false;
         }
       } 
       else if(abs(LiftSensor.position(degrees)) > 324) {
         RunLift(50);
         if(abs(LiftSensor.position(degrees)) < 342) {
-          MacroEn = 0;
+          false;
         }
       } 
     }
 }
-
 
 void RunRoller(int val)
 {

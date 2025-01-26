@@ -6,6 +6,8 @@
 	"files.associations": {
 		"ostream": "cpp",
 		"iostream": "cpp",
-		"cmath": "cpp"
+		"cmath": "cpp",
+		"*.tcc": "cpp",
+		"string": "cpp"
 	}
 }

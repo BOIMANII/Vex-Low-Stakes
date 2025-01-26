@@ -307,38 +307,42 @@ int dd = 0;
 
 int CurrentDegree = 0;
 int CurrentDegree2 = 0;
+int Eject = 0;
+/*
 int ITask(void)
 
 {
+
+
+
   double pow;
-  
+  // 200 to 230 for red, 350-200 for blue
   pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
   RunRoller(-pow);
+  if (350 > Csen.hue() > 200 && Csen.isNearObject() == 1) {
+    olddegree = In1.position(degrees) + 200;
 
-  if(Csen.color() == 255) {
-    CurrentDegree = In1.position(degrees) + 5;
-    while (In1.position(degrees) < CurrentDegree) {
-      RunRoller(-100);
-      CurrentDegree2 = In1.position(degrees) + 10;
-      if (In1.position(degrees) >= CurrentDegree) {
-        while(In1.position(degrees) > CurrentDegree2) {
-          RunRoller(25);
-        }
-        
-        
-      }
-    }
-
-    
-
-
+    Eject = 1;
   }
+  if (Eject == 1) {
+    if (In1.position(degrees) < olddegree) {
+      RunRoller(-100);
+    }
+    else {
+      Brain.Timer.clear();
+      while(Brain.Timer.time(msec) < 1000) {
+        RunLift(0);
+      }
+      Eject = 0;
+    }
+  }
+  
   return 0;
 }
 
 
+*/
 
-/*
 int ITask(void) {
 
   double pow;
@@ -346,7 +350,7 @@ int ITask(void) {
   RunRoller(-pow);
   return 0;
 }
-*/
+
 
 int ButtonPressingX,XTaskActiv;
 int ButtonPressingY,YTaskActiv;
@@ -435,7 +439,69 @@ int BTask(void)
   return 0;
   }
 
+int ATask(void) {
+    int pow1 = 0;
+    int targetPosition = 333;  // Desired position between 324 and 342 degrees
 
+    while (true) {
+        if (ATaskActiv == 1) {
+            int currentPos = abs(LiftSensor.position(degrees));
+            int error = targetPosition - currentPos;
+
+            // Invert the lift power in the proportional control
+            int liftPower = error * -0.5;  // Negative gain to invert direction
+
+            // Limit the power to within motor capabilities
+            if (liftPower > 100) liftPower = 100;
+            if (liftPower < -100) liftPower = -100;
+
+            // Ensure minimum power to overcome static friction
+            if (liftPower > 0 && liftPower < 20) liftPower = 20;
+            if (liftPower < 0 && liftPower > -20) liftPower = -20;
+
+            RunLift(liftPower);
+
+            // Stop the lift when close enough to the target
+            if (abs(error) <= 2) {
+                RunLift(0);
+                ATaskActiv = 0;
+            }
+
+        } else {
+            // Invert manual control power
+            pow1 = (Controller1.ButtonL1.pressing() - Controller1.ButtonL2.pressing()) * -100;
+
+            if (pow1 == 0) {
+                Lift.setStopping(hold);
+                Lift.stop();
+            } else {
+                RunLift(pow1);
+            }
+        }
+
+        // Handle Button A presses
+        if (Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+            ButtonPressingA = 1;
+            ATaskActiv = 1;
+        } else if (!Controller1.ButtonA.pressing()) {
+            ButtonPressingA = 0;
+        }
+
+        // Override if BTaskActiv is active
+        if (BTaskActiv == 1 && Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+            ButtonPressingA = 1;
+            ATaskActiv = 0;
+            RunLift(0);
+        }
+
+        // Prevent CPU overload
+        wait(10, msec);
+    }
+    return 0;
+}
+
+
+/*
 int ATask (void) {
 int pow1 = 0;
 
@@ -482,7 +548,7 @@ int pow1 = 0;
   }
   return 0;
 }
-
+*/
 
 
 /*---------------------------------------------------------------------------*/
@@ -548,12 +614,8 @@ int main() {
     wait(200, msec);
     cout << "Hue" << endl;
     cout << Csen.hue() << endl;
-    cout << "Macro Angle below" << endl;
-    cout << LiftSensor.position(degrees) << endl;
     cout << "Press" << endl;
     cout << Csen.isNearObject() << endl;
-    cout << "Color" << endl;
-    cout << Csen.color() << endl;
     cout << "Desired" << endl;
     cout << CurrentDegree << endl;
     cout << "Current" << endl;
