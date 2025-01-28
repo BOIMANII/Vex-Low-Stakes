@@ -342,7 +342,7 @@ int ITask(void)
 
 
 */
-
+/*
 int ITask(void) {
 
   double pow;
@@ -350,6 +350,61 @@ int ITask(void) {
   RunRoller(-pow);
   return 0;
 }
+*/
+int hue = Csen.hue();
+bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
+int ITask(void) {
+    // Initialize variables
+    int olddegree = 0;
+    int Eject = 0;
+    double pow;
+
+    while (true) {
+        // Calculate intake power
+        pow = ((Controller1.ButtonR2.pressing() - Controller1.ButtonR1.pressing()) * 100);
+        
+        // Only run the roller if not in ejection mode
+        if (Eject == 0) {
+            RunRoller(-pow);
+        }
+
+        // Improved color detection logic with red hue range check
+        int hue = Csen.hue();
+        bool isRed = (hue >= 0 && hue <= 30) || (hue >= 330 && hue <= 360);
+
+        // Check if an object is detected and it's the desired color
+        if (isRed && Csen.isNearObject() == 1) {
+            olddegree = In1.position(degrees) + 250;
+            Eject = 1;
+            RunRoller(0);  // Immediately stop the roller to prepare for ejection
+            Brain.Timer.clear();  // Clear the timer
+        }
+
+        // Eject mechanism to "yeet" the ring
+        if (Eject == 1) {
+            if (In1.position(degrees) < olddegree) {
+                RunRoller(-100);  // Increase roller speed to maximize ejection force
+            } else {
+                RunRoller(0);  // Immediately stop the roller before lifting
+                if (Brain.Timer.time(msec) < 200) {
+                    RunLift(0);
+                } else if (Brain.Timer.time(msec) < 350) {
+                    RunRoller(10);  // Yeet the ring
+                } else {
+                    RunRoller(0);  // Stop the roller after ejection
+                    Eject = 0;
+                }
+            }
+        }
+
+        // Small delay to prevent CPU overload
+        wait(10, msec);
+    }
+    return 0;
+}
+
+
+
 
 
 int ButtonPressingX,XTaskActiv;
@@ -439,38 +494,38 @@ int BTask(void)
   return 0;
   }
 
+
 int ATask(void) {
+    // Initialize variables
     int pow1 = 0;
-    int targetPosition = 333;  // Desired position between 324 and 342 degrees
+    int targetPositionLower = 324;  // Lower target position
+    int targetPositionUpper = 342;  // Upper target position
+    int minSpeed = 30;              // Minimum speed to overcome static friction
+    int toggle = 0;                 // Replacing BTaskActiv
 
     while (true) {
         if (ATaskActiv == 1) {
             int currentPos = abs(LiftSensor.position(degrees));
-            int error = targetPosition - currentPos;
 
-            // Invert the lift power in the proportional control
-            int liftPower = error * -0.5;  // Negative gain to invert direction
-
-            // Limit the power to within motor capabilities
-            if (liftPower > 100) liftPower = 100;
-            if (liftPower < -100) liftPower = -100;
-
-            // Ensure minimum power to overcome static friction
-            if (liftPower > 0 && liftPower < 20) liftPower = 20;
-            if (liftPower < 0 && liftPower > -20) liftPower = -20;
-
-            RunLift(liftPower);
-
-            // Stop the lift when close enough to the target
-            if (abs(error) <= 2) {
-                RunLift(0);
+            if (currentPos < targetPositionLower) {
+                RunLift(-50);
+                if (currentPos >= targetPositionLower) {
+                    ATaskActiv = 0;
+                    RunLift(0);
+                }
+            } else if (currentPos > targetPositionUpper) {
+                RunLift(50);
+                if (currentPos <= targetPositionUpper) {
+                    ATaskActiv = 0;
+                    RunLift(0);
+                }
+            } else {
                 ATaskActiv = 0;
+                RunLift(0);
             }
-
         } else {
             // Invert manual control power
-            pow1 = (Controller1.ButtonL1.pressing() - Controller1.ButtonL2.pressing()) * -100;
-
+            pow1 = (Controller1.ButtonL1.pressing() - Controller1.ButtonL2.pressing()) * 100;
             if (pow1 == 0) {
                 Lift.setStopping(hold);
                 Lift.stop();
@@ -487,8 +542,8 @@ int ATask(void) {
             ButtonPressingA = 0;
         }
 
-        // Override if BTaskActiv is active
-        if (BTaskActiv == 1 && Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+        // Use toggle instead of BTaskActiv
+        if (toggle == 1 && Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
             ButtonPressingA = 1;
             ATaskActiv = 0;
             RunLift(0);
@@ -499,6 +554,8 @@ int ATask(void) {
     }
     return 0;
 }
+
+
 
 
 /*
@@ -611,17 +668,31 @@ int main() {
   
     using std::cout;
     using std::endl;
-    wait(200, msec);
+    wait(500, msec);
+    cout << "CurrentLift" << endl;
+    cout << LiftSensor.angle() << endl;
+    cout << "Current" << endl;
+    cout << In1.position(degrees) << endl;
+/*
+Dump Pit
+    cout << "blue" << endl;
+    cout << isBlue << endl;
     cout << "Hue" << endl;
     cout << Csen.hue() << endl;
     cout << "Press" << endl;
     cout << Csen.isNearObject() << endl;
     cout << "Desired" << endl;
     cout << CurrentDegree << endl;
+    cout << "CurrentLift" << endl;
+    cout << LiftSensor.angle() << endl;
     cout << "Current" << endl;
     cout << In1.position(degrees) << endl;
     cout << "Gyro" << endl;
     cout << Gyro.angle() << endl;
+
+
+
+*/
     
     //--------------------------------------------------------------------------------
 

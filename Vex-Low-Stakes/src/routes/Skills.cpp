@@ -12,7 +12,15 @@
     Lift.setStopping(hold);
     Lift.stop();
 */
+void SkillsMacro() {
+    while(LiftSensor.position(degrees) > 342){
+        RunLift(40);
+    }
+    Lift.setStopping(hold);
+    Lift.stop();
+}
 void Skills(){
+        SkillsMacro();
         /*
         Zeroing(true,true);
         LiftSensor.setPosition(359.9, degrees);
