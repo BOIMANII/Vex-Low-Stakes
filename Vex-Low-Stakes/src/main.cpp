@@ -353,6 +353,18 @@ int ITask(void) {
 */
 int hue = Csen.hue();
 bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
+
+
+int ITask(void) {
+  double pow;
+  pow = ((Controller1.ButtonR2.pressing() - Controller1.ButtonR1.pressing()) * 100);
+  RunRoller(-pow);
+
+  return 0;  
+
+}
+
+/*
 int ITask(void) {
     // Initialize variables
     int olddegree = 0;
@@ -404,7 +416,7 @@ int ITask(void) {
 }
 
 
-
+*/
 
 
 int ButtonPressingX,XTaskActiv;
