@@ -54,7 +54,7 @@ void Skills(){
         MoveEncoderPID(Test, 70, 2.5, 0.2, 90, 0); // move back from wall steak
         RunRoller(-150);
         TurnMaxTimePID(Test, 180, 1.0, 0); // turn to face rings
-        MoveEncoderPID(Test, -30, 90, 0.2, 180, 0); // intake rings
+        MoveEncoderPID(Test, -50, 90, 0.2, 180, 0); // intake rings
         wait(1000, msec);
         MoveEncoderPID(Test, 50, 35, 0.4, 180, 0); // move back from wall 
         TurnMaxTimePID(Test, 145, 0.4, 0); // turn to face ring
@@ -75,11 +75,37 @@ void Skills(){
         RunRoller(-100);
         MoveEncoderPID(Test, -70, 4, 0.2, 0, 0); // move to ring
         wait(250, msec);
-        TurnMaxTimePID(Test, 45, 0.5, 0); // turn to face ring
+        TurnMaxTimePID(Test, 40, 0.5, 0); // turn to face ring
         RunRoller(0);
-        MoveEncoderPID(Test, -70, 22, 0.2, 45, 0); // move to ring
+        MoveEncoderPID(Test, -70, 22, 0.2, 40, 0); // move to ring
         RunRoller(-100);
         wait(1000, msec);
         RunRoller(0);
-        MoveEncoderPID(Test, 70, 22, 0.2, 45, 0); // move to back from mid
+        MoveEncoderPID(Test, 70, 20, 0.2, 40, 0); // move to back from mid
+        TurnMaxTimePID(Test, -40, 0.5, 0); // turn to face line
+        MoveEncoderPID(Test, -60, 50.5, 0.2, -40, 0); // move to line
+        TurnMaxTimePID(Test, -90, 0.5, 0); // turn to face wall steak
+        SkillsMacro();
+        MoveEncoderPID(Test, -70, 4, 0.2, -90, 0); // move to wall steak
+        wait(1300, msec);
+        RunRoller(0);
+        RunLift(100);
+        wait(500, msec);
+        RunLift(-100);
+        wait(350, msec);
+        RunLift(0);
+        MoveEncoderPID(Test, 70, 2.5, 0.2, -90, 0); // move back from wall steak
+        RunRoller(-150);
+        TurnMaxTimePID(Test, -180, 1.0, 0); // turn to face rings
+        MoveEncoderPID(Test, -50, 90, 0.2, -180, 0); // intake rings
+        wait(1000, msec);
+        MoveEncoderPID(Test, 50, 35, 0.4, -180, 0); // move back from wall 
+        TurnMaxTimePID(Test, -145, 0.4, 0); // turn to face ring
+        MoveEncoderPID(Test, -50, 10, 0.2, -145, 0); // get ring
+        wait(500, msec);
+        TurnMaxTimePID(Test, 47, 1.0, 0); // turn to face pos corner
+        MoveTimePID(Test, -30, 1.2, 0.2, 47, 0); // move into corner
+        RunRoller(0);
+        wait(250, msec);
+        Clamp.set(false);
 }
