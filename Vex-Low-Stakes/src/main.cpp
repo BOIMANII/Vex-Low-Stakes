@@ -673,7 +673,13 @@ int main() {
   // Run the pre-autonomous function.
   pre_auton();
 
-  
+
+
+
+
+
+
+   
   // Prevent main from exiting with an infinite loop.
   while (true) {
     Csen.setLight(ledState::on);

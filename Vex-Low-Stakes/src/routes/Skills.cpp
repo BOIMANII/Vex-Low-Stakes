@@ -48,10 +48,10 @@ void Skills(){
         RunRoller(0);
         RunLift(100);
         wait(500, msec);
+        MoveEncoderPID(Test, 70, 2.5, 0.2, 90, 0); // move back from wall steak
         RunLift(-100);
         wait(350, msec);
         RunLift(0);
-        MoveEncoderPID(Test, 70, 2.5, 0.2, 90, 0); // move back from wall steak
         RunRoller(-150);
         TurnMaxTimePID(Test, 180, 1.0, 0); // turn to face rings
         MoveEncoderPID(Test, -50, 90, 0.2, 180, 0); // intake rings
@@ -75,13 +75,6 @@ void Skills(){
         RunRoller(-100);
         MoveEncoderPID(Test, -70, 4, 0.2, 0, 0); // move to ring
         wait(250, msec);
-        TurnMaxTimePID(Test, 40, 0.5, 0); // turn to face ring
-        RunRoller(0);
-        MoveEncoderPID(Test, -70, 22, 0.2, 40, 0); // move to ring
-        RunRoller(-100);
-        wait(1000, msec);
-        RunRoller(0);
-        MoveEncoderPID(Test, 70, 20, 0.2, 40, 0); // move to back from mid
         TurnMaxTimePID(Test, -40, 0.5, 0); // turn to face line
         MoveEncoderPID(Test, -60, 50.5, 0.2, -40, 0); // move to line
         TurnMaxTimePID(Test, -90, 0.5, 0); // turn to face wall steak
