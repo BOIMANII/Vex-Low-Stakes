@@ -27,6 +27,26 @@ void Skills(){
         PIDDataSet Test={1.5,0.1,0.15};
         RunRoller(-100);
         wait(500, msec);
+        MoveEncoderPID(Test, -50, 5, 0.4, 0, 0);
+        RunRoller(0);
+        TurnMaxTimePID(Test, -90, 0.3, 0);
+        TurnMaxTimePID(Test, -90, 0.3, 1);
+        MoveEncoderPID(Test, 100, 10, 0.4, -90, 0);
+        MoveEncoderPID(Test, 30, 5, 0.3, -90, 1);
+        Clamp.set(true);
+        wait(600, msec);
+        MoveEncoderPID(Test, 30, 8, 0.3, -90, 1);
+        TurnMaxTimePID(Test, 0, 0.3, 1);
+        TurnMaxTimePID(Test, 0, 0.3, 1);
+        RunRoller(-100);
+        MoveEncoderPID(Test, -70, 20, 0.7, 0, 1);
+        TurnMaxTimePID(Test, 30, .7, 1 );
+        MoveEncoderPID(Test, -70, 40, 0.7, 30, 1);
+        TurnMaxTimePID(Test, 90, 0.7, 1);
+
+        /*
+        RunRoller(-100);
+        wait(500, msec);
         MoveEncoderPID(Test, -40, 4, 0.3, 0, 0); // move forward
         RunRoller(0);
         wait(250, msec);
@@ -67,21 +87,19 @@ void Skills(){
         Clamp.set(false);
         MoveEncoderPID(Test, -50, 2, 0.2, -45, 0); // move out of corner
         TurnMaxTimePID(Test, 90, 1.5, 0); // turn to face mogo
+
+ 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+
         MoveEncoderPID(Test, 70, 115, 0.2, 90, 0); // move to mogo
         MoveEncoderPID(Test, 30, 10, 0.3, 90, 1); // Move to mogo
         Clamp.set(true);
         wait(500, msec);
-        TurnMaxTimePID(Test, 0, 1.0, 0); // turn to face ring
+        TurnMaxTimePID(Test, -0, 1.0, 0); // turn to face ring
         RunRoller(-100);
-        MoveEncoderPID(Test, -70, 4, 0.2, 0, 0); // move to ring
-        wait(250, msec);
-        TurnMaxTimePID(Test, 40, 0.5, 0); // turn to face ring
-        RunRoller(0);
-        MoveEncoderPID(Test, -70, 22, 0.2, 40, 0); // move to ring
-        RunRoller(-100);
-        wait(1000, msec);
-        RunRoller(0);
-        MoveEncoderPID(Test, 70, 20, 0.2, 40, 0); // move to back from mid
+        MoveEncoderPID(Test, -70, 16, 0.2, 0, 0); // move to ring
+        MoveEncoderPID(Test, -30, 2.5, 0.3, 0, 1); // Move to ring
         TurnMaxTimePID(Test, -40, 0.5, 0); // turn to face line
         MoveEncoderPID(Test, -60, 50.5, 0.2, -40, 0); // move to line
         TurnMaxTimePID(Test, -90, 0.5, 0); // turn to face wall steak
@@ -108,4 +126,6 @@ void Skills(){
         RunRoller(0);
         wait(250, msec);
         Clamp.set(false);
+        MoveEncoderPID(Test, -50, 2, 0.2, 45, 0); // move out of corner
+*/
 }
