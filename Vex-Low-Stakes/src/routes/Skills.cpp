@@ -40,9 +40,15 @@ void Skills(){
         TurnMaxTimePID(Test, 0, 0.3, 1);
         RunRoller(-100);
         MoveEncoderPID(Test, -70, 20, 0.7, 0, 1);
-        TurnMaxTimePID(Test, 30, .7, 1 );
+        TurnMaxTimePID(Test, 30, 0.7, 1 );
         MoveEncoderPID(Test, -70, 40, 0.7, 30, 1);
         TurnMaxTimePID(Test, 90, 0.7, 1);
+        SkillsMacro();
+        MoveEncoderPID(Test, -70, 30, 0.7, 90, 1); // move towards wall stake
+        wait(1300, msec);
+        RunRoller(0); // stop running lift
+        RunLift(100); // run wall stakes mech
+        wait(1000, msec);
 
         /*
         RunRoller(-100);
