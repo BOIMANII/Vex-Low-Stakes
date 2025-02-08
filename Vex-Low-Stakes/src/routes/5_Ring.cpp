@@ -25,14 +25,14 @@ void Red_5(){wait(250, msec);
     TurnMaxTimePID(Test, 150, 0.2, 0); // turn to face ring stack
     TurnMaxTimePID(Test, 150, 0.2, 0); // turn to face ring stack
     MoveEncoderPID(Test, -60, 11, 0.3, 150, 0); //intake ring
-    wait(250, msec);
+    wait(1000, msec);
     MoveEncoderPID(Test, 60, 3, 0.3, 150, 0); //intake ring
     TurnMaxTimePID(Test, 0, 0.2, 0); // turn to face ring stack
     TurnMaxTimePID(Test, 0, 0.2, 0); // turn to face ring stack
     RunLift(100);
     wait(250, msec);
     RunLift(0);
-    MoveEncoderPID(Test, 60, 2, 0.3, 150, 0); //intake ring
+    MoveEncoderPID(Test, 60, 2, 0.3, 150, 0); //ladder
 
     /* middle rings:
     TurnMaxTimePID(Test, 210, 0.2, 0); // turn to face ring stack
@@ -103,9 +103,14 @@ void Blue_5(){
     TurnMaxTimePID(Test, -150, 0.2, 0); // turn to face ring stack
     TurnMaxTimePID(Test, -150, 0.2, 0); // turn to face ring stack
     MoveEncoderPID(Test, -60, 11, 0.3, -150, 0); //intake ring
-    wait(250, msec);
+    wait(1000, msec);
     MoveEncoderPID(Test, 60, 3, 0.3, -150, 0); //intake ring
-    
+    TurnMaxTimePID(Test, 0, 0.2, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, 0, 0.2, 0); // turn to face ring stack
+    MoveEncoderPID(Test, 60, 3, 0.3, -150, 0); //ladder
+    RunLift(100);
+    wait(250, msec);
+    RunLift(0);
 
 
 
