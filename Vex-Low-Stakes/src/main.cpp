@@ -507,42 +507,57 @@ int BTask(void)
   }
 
 
-int ATask(void) {
-    // Initialize variables
+  int ATask(void) {
     int pow1 = 0;
-    int targetPositionLower = 324;  // Lower target position
-    int targetPositionUpper = 342;  // Upper target position
-    int minSpeed = 30;              // Minimum speed to overcome static friction
-    int toggle = 0;                 // Replacing BTaskActiv
+    int targetPosition = 342;  // Desired position between 324 and 342 degrees
+    double integral = 0.0;     // Integral term
+    double previousError = 0.0; // Previous error for derivative calculation
+    double Kp = -0.5;           // Proportional gain (adjust as needed)
+    double Ki = 0.1;            // Integral gain (adjust as needed)
+    double Kd = 0.1;            // Derivative gain (adjust as needed)
 
     while (true) {
         if (ATaskActiv == 1) {
             int currentPos = abs(LiftSensor.position(degrees));
+            double error = targetPosition - currentPos;
 
-            if (currentPos < targetPositionLower) {
-                RunLift(-50);
-                if (currentPos >= targetPositionLower) {
-                    ATaskActiv = 0;
-                    RunLift(0);
-                }
-            } else if (currentPos > targetPositionUpper) {
-                RunLift(50);
-                if (currentPos <= targetPositionUpper) {
-                    ATaskActiv = 0;
-                    RunLift(0);
-                }
-            } else {
-                ATaskActiv = 0;
+            // Calculate integral term
+            integral += error;
+
+            // Calculate derivative term
+            double derivative = error - previousError;
+
+            // PID calculation
+            double liftPower = Kp * error + Ki * integral + Kd * derivative;
+
+            // Limit the power to within motor capabilities
+            if (liftPower > 100) liftPower = 100;
+            if (liftPower < -100) liftPower = -100;
+
+            // Ensure minimum power to overcome static friction
+            if (liftPower > 0 && liftPower < 40) liftPower = 40;
+            if (liftPower < 0 && liftPower > -40) liftPower = -40;
+
+            RunLift(liftPower);
+
+            // Stop the lift when close enough to the target
+            if (abs(error) <= 2) {
                 RunLift(0);
+                ATaskActiv = 0;
             }
+
+            // Update previous error
+            previousError = error;
+
         } else {
             // Invert manual control power
-            pow1 = (Controller1.ButtonL1.pressing() - Controller1.ButtonL2.pressing()) * 100;
+            pow1 = (Controller1.ButtonL1.pressing() - Controller1.ButtonL2.pressing()) * -100;
+
             if (pow1 == 0) {
                 Lift.setStopping(hold);
                 Lift.stop();
             } else {
-                RunLift(pow1);
+                RunLift(-pow1);
             }
         }
 
@@ -554,8 +569,8 @@ int ATask(void) {
             ButtonPressingA = 0;
         }
 
-        // Use toggle instead of BTaskActiv
-        if (toggle == 1 && Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
+        // Override if BTaskActiv is active
+        if (BTaskActiv == 1 && Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
             ButtonPressingA = 1;
             ATaskActiv = 0;
             RunLift(0);
@@ -566,6 +581,7 @@ int ATask(void) {
     }
     return 0;
 }
+
 
 
 
