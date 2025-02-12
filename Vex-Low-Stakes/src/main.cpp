@@ -49,6 +49,11 @@ void pre_auton(void) {
   vexcodeInit();
   Gyro.calibrate();
   Gyro.setHeading(0, degrees);
+
+
+  if(LiftSensor.position(degrees) != 359) {
+    LiftSensor.setPosition(359.99999999999, degrees);
+  }
   
 
 //Ensure Robot Launch Position is set before auto proceeds, once plugged into field control,
