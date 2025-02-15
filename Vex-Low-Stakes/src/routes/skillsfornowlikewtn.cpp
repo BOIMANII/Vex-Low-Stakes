@@ -16,6 +16,7 @@ void RMogo() {
     Zeroing(true,true);
     LiftSensor.setPosition(359.9, degrees);
     PIDDataSet Test={1.5,0.1,0.15};
+    /*
     RunRoller(-100);
     wait(500, msec);
     MoveEncoderPID(Test, -50, 5, 0.4, 0, 0);//move bacc
@@ -145,6 +146,8 @@ void RMogo() {
     wait(400, msec);
     RunLift(-100);
     RunLift(0);
-    MoveEncoderPID(Test, 30, 45, 0.2, 37, 0); // out of corner
+    */
+    MoveEncoderPID(Test, 70, 47, 0.2, 0, 0); // out of corner
+    MoveEncoderPID(Test, 50, 30, 0.2, 0, 0); // out of corner
 }
         
