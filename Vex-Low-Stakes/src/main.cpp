@@ -35,7 +35,7 @@ competition Competition;
 
 bool SP;
 bool EXIT;
-void pre_auton(void) {
+void pre_auton(void) { // prepare for auto, by setting default pneu states and zeroing gyro
   //ATaskActiv = 1;
    EXIT=false;
   Clamp.set(false);
@@ -51,7 +51,7 @@ void pre_auton(void) {
   Gyro.setHeading(0, degrees);
 
 
-  if(LiftSensor.position(degrees) != 359) {
+  if(LiftSensor.position(degrees) != 359) { //Set degrees to 359, due to macro issues (runs in wrong way if zeroed to 0 or above.)
     LiftSensor.setPosition(359.99999999999, degrees);
   }
   
@@ -296,68 +296,19 @@ int DriveTask(void){
   {
     EXIT=true;
 
-    RV=-Controller1.Axis3.position(percent)+Controller1.Axis1.position(percent);
-    LV=-Controller1.Axis3.position(percent)-Controller1.Axis1.position(percent);
-
+    RV=-Controller1.Axis3.position(percent)+Controller1.Axis1.position(percent); 
+    LV=-Controller1.Axis3.position(percent)-Controller1.Axis1.position(percent); 
+    //Find the Forward/Backward to calculate velocity of left/right side
+    //Allows for us to move diagonally
     Move(LV,RV);
-
+    //uses the values of Lv and Rv as velocity %s to move the left/right side of the motors at said %.
   }
 
 return 0;
 }
-int V;
-int olddegree = 0;
-int dd = 0;
-
-
-int CurrentDegree = 0;
-int CurrentDegree2 = 0;
-int Eject = 0;
-/*
-int ITask(void)
-
-{
 
 
 
-  double pow;
-  // 200 to 230 for red, 350-200 for blue
-  pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
-  RunRoller(-pow);
-  if (350 > Csen.hue() > 200 && Csen.isNearObject() == 1) {
-    olddegree = In1.position(degrees) + 200;
-
-    Eject = 1;
-  }
-  if (Eject == 1) {
-    if (In1.position(degrees) < olddegree) {
-      RunRoller(-100);
-    }
-    else {
-      Brain.Timer.clear();
-      while(Brain.Timer.time(msec) < 1000) {
-        RunLift(0);
-      }
-      Eject = 0;
-    }
-  }
-  
-  return 0;
-}
-
-
-*/
-/*
-int ITask(void) {
-
-  double pow;
-  pow=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())*100);//Calculate intake power, if button pressed, button.pressing returns 1
-  RunRoller(-pow);
-  return 0;
-}
-*/
-int hue = Csen.hue();
-bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
 
 
 int ITask(void) {
@@ -368,6 +319,10 @@ int ITask(void) {
   return 0;  
 
 }
+
+int hue = Csen.hue();
+bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
+
 
 /*
 int ITask(void) {
@@ -424,10 +379,11 @@ int ITask(void) {
 */
 
 
-int ButtonPressingX,XTaskActiv;
-int ButtonPressingY,YTaskActiv;
-int ButtonPressingA,ATaskActiv;
-int ButtonPressingB,BTaskActiv;
+
+int ButtonPressingX,XTaskActiv; //Defines the toggle and pressing variables for Clamping
+int ButtonPressingY,YTaskActiv; //Defines the toggle and pressing variables for Doinker
+int ButtonPressingA,ATaskActiv; //Defines the toggle and pressing variables for Wall Stake Macro.
+int ButtonPressingB,BTaskActiv; //Defines the toggle and pressing variables for Intake Lift
 int XTask(void)
 {
     while(true)
@@ -440,7 +396,7 @@ int XTask(void)
       Clamp.set(true);
     }
 
-    else if(!Controller1.ButtonX.pressing())ButtonPressingX=0;
+    else if(!Controller1.ButtonX.pressing())ButtonPressingX=0; //Checks if the botton isn't being held down
 
     else if(XTaskActiv==1&&Controller1.ButtonX.pressing()&&ButtonPressingX==0)//Finding if task is active and if ButtonX wasn't pressed before
     {
@@ -467,7 +423,7 @@ int XTask(void)
       Doinker.set(false);
     }
 
-    else if(!Controller1.ButtonY.pressing())ButtonPressingY=0;
+    else if(!Controller1.ButtonY.pressing())ButtonPressingY=0; //Checks if the botton isn't being held down
 
     else if(YTaskActiv==1&&Controller1.ButtonY.pressing()&&ButtonPressingY==0)//Finding if task is active and if ButtonX wasn't pressed before
     {
@@ -495,7 +451,7 @@ int BTask(void)
       IntakeLift.set(false);
     }
 
-    else if(!Controller1.ButtonB.pressing())ButtonPressingB=0;
+    else if(!Controller1.ButtonB.pressing())ButtonPressingB=0; //Checks if the botton isn't being held down
 
     else if(BTaskActiv==1&&Controller1.ButtonB.pressing()&&ButtonPressingB==0)//Finding if task is active and if ButtonX wasn't pressed before
     {
@@ -504,7 +460,8 @@ int BTask(void)
       IntakeLift.set(true);
     }
     //----------------------
-      //Toggles Doinky doinker
+      //Toggles Intake lift
+      //allows to get rings on top of others
 
     }
 
@@ -591,54 +548,6 @@ int BTask(void)
 
 
 
-/*
-int ATask (void) {
-int pow1 = 0;
-
-  while(true) {
-    if(ATaskActiv==1) {
-      if(abs(LiftSensor.position(degrees)) < 324) {
-        RunLift(-50);
-        if(abs(LiftSensor.position(degrees)) > 324) {
-          ATaskActiv = 0;
-        }
-      } 
-      else if(abs(LiftSensor.position(degrees)) > 324) {
-        RunLift(50);
-        if(abs(LiftSensor.position(degrees)) < 342) {
-          ATaskActiv = 0;
-        }
-      } 
-    }
-    else {
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-    }
-
-    if(Controller1.ButtonA.pressing() && ButtonPressingA == 0) {
-      ButtonPressingA=1;
-      ATaskActiv=1;
-    }
-
-    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
-
-    else if(BTaskActiv==1&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
-      ButtonPressingA=1;
-      ATaskActiv=0;
-      RunLift(0);
-    }
-
-
-  }
-  return 0;
-}
-*/
 
 
 /*---------------------------------------------------------------------------*/
@@ -660,8 +569,8 @@ void usercontrol(void) {
     // values based on feedback from the joysticks.
     
 
-
-    task Dtask=task(DriveTask);
+//Runs all the tasks, helps with organizing each and every function of the robot
+    task Dtask=task(DriveTask); 
     task Atask=task(ATask);
     task Xtask=task(XTask);
     task Ytask=task(YTask);    
@@ -689,6 +598,8 @@ int main() {
   //LiftSensor.setPosition(-2, degrees);
 
   // Set up callbacks for autonomous and driver control periods.
+//Runs autonomous before drivercontrol, allowing for the controller to 
+//function with a field controller or a smart field
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
   // Run the pre-autonomous function.
@@ -701,19 +612,21 @@ int main() {
 
 
    
-  // Prevent main from exiting with an infinite loop.
+// Prevent main from exiting with an infinite loop.
+// Incorporates printing in log, for troubleshooting whilst controller is connected to the coding device.
   while (true) {
     Csen.setLight(ledState::on);
   
     using std::cout;
     using std::endl;
     wait(500, msec);
-    cout << "CurrentLift" << endl;
-    cout << LiftSensor.angle() << endl;
-    cout << "Current" << endl;
-    cout << In1.position(degrees) << endl;
+    cout << "CurrentLift" << endl; // Prints the angle of the wall stake linear rotations sensor
+    cout << LiftSensor.angle() << endl; //LiftSensor is the defined name for the rotation sensor
+    cout << "Current" << endl; // This is the angle of the intake, used to troubleshoot color sorting
+    cout << In1.position(degrees) << endl; //In1 is the name of the intake motor, from ^, uses Rotation
 /*
-Dump Pit
+Dump Pit, This is where all the unused print statements are stored, being taken out from time to time
+for their individual uses, with many for either checking the gyro rotation, Color sensor, etc. 
     cout << "blue" << endl;
     cout << isBlue << endl;
     cout << "Hue" << endl;
@@ -739,94 +652,3 @@ Dump Pit
 }
 }
 
-  // copy of macro so if i break it i still have a backup 
-  // while(true) {
-  //   if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
-  //     mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
-  //     RunLift(-100);
-  //     std::cout << mvel << std::endl; //test
-  //     if(abs(LiftSensor.position(degrees)) > 19) {
-  //       YTaskActiv = 0;
-  //     }
-  //   }
-  //   else {
-  //     pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
-  //     std::cout << mvel << std::endl; //test
-  //     if(pow1==0) {
-  //       Lift.setStopping(hold);
-  //       Lift.stop();
-  //     }
-  //     else {
-  //       RunLift(pow1);
-  //     }
-  //   } 
-
-    //commenting out the button a pressing macro because we do not have a rotation sensor for now
-
-
-
-/*
-int BTask(void) {
-  //ATaskActiv = 1;
-  //ButtonPressingA=0;
-  int pow1 = 0;
-    if(ATaskActiv==1&&Controller1.ButtonUp.pressing()&&ButtonPressingA==0) {
-
-
-      while(true) {
-    if(abs(LiftSensor.position(degrees)) <= 19 && YTaskActiv==1) {
-      mvel = (90 - LiftSensor.position(vex::rotationUnits::deg)) 1.25; //301.81
-      RunLift(-100);
-      std::cout << mvel << std::endl; //test
-      if(abs(LiftSensor.position(degrees)) > 19) {
-        YTaskActiv = 0;
-      }
-    }
-    else {
-      pow1=((Controller1.ButtonR2.pressing()-Controller1.ButtonR1.pressing())100);//Calculate intake power, if button pressed, button.pressing returns 1
-      std::cout << mvel << std::endl; //test
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-    } 
-      
-      if(abs(LiftSensor.position(degrees)) < 360) {
-        RunLift(-100);
-      }
-      /*if(abs(LiftSensor.position(degrees)) > 1) {
-        ATaskActiv = 0;
-      }
-      else if (abs(LiftSensor.position(degrees)) > 1) {
-      RunLift(100);
-      if(abs(LiftSensor.position(degrees)) < 1) {
-        ATaskActiv = 0;
-        RunLift(0);
-      }
-      } 
-      } 
-      
-    }
-
-    else if(!Controller1.ButtonA.pressing())ButtonPressingA=0;
-
-    else if(ATaskActiv==0&&Controller1.ButtonA.pressing()&&ButtonPressingA==0) {
-
-      ATaskActiv = 1;
-      pow1=(Controller1.ButtonL1.pressing()-Controller1.ButtonL2.pressing())*100;
-      if(pow1==0) {
-        Lift.setStopping(hold);
-        Lift.stop();
-      }
-      else {
-        RunLift(pow1);
-      }
-      
-    }
-
-  return 0;
-}
-*/
