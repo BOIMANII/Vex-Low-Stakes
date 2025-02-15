@@ -256,7 +256,7 @@ if(AutoSelectorVal==2)// Left side either red/blue
 
 if(AutoSelectorVal==3)//Risky
 {
-  BMogo();
+  
 } 
 
 if(AutoSelectorVal==4)// risky AWP

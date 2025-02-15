@@ -12,7 +12,7 @@ void Red_5(){wait(250, msec);
     RunLift(110); // secore unto alleynce steak
     wait(600, msec);
     RunLift(-100);
-    MoveEncoderPID(Test, 50, 4, 0.3, 0, 0); //leave line
+    MoveEncoderPID(Test, 50, 5.0, 0.3, 0, 0); //leave line
     TurnMaxTimePID(Test, 60, 0.2, 0); // turn to mogo
     TurnMaxTimePID(Test, 60, 0.2, 0); // turn to mogo
     RunLift(0);
@@ -25,14 +25,11 @@ void Red_5(){wait(250, msec);
     TurnMaxTimePID(Test, 150, 0.2, 0); // turn to face ring stack
     TurnMaxTimePID(Test, 150, 0.2, 0); // turn to face ring stack
     MoveEncoderPID(Test, -60, 9.5, 0.3, 150, 0); //intake ring
-    wait(1000, msec);
-    MoveEncoderPID(Test, 60, 3, 0.3, 150, 0); //intake ring
-    TurnMaxTimePID(Test, -55, 0.2, 0); // turn to face ring stack
-    TurnMaxTimePID(Test, -55, 0.2, 0); // turn to face ring stack
-    MoveEncoderPID(Test, -60, 10, 0.3, -55, 0); //ladder
-    RunLift(100);
-    wait(250, msec);
-    RunLift(0);
+    wait(500, msec);
+    TurnMaxTimePID(Test, -27, 1.0, 0); // turn to face ladder
+    RunRoller(0); // stop roller
+    MoveEncoderPID(Test, -50, 28, 0.3, -27, 0); //ladder
+   
 
     /* middle rings:
     TurnMaxTimePID(Test, 210, 0.2, 0); // turn to face ring stack
@@ -90,9 +87,9 @@ void Blue_5(){
     RunLift(110); // secore unto alleynce steak
     wait(600, msec);
     RunLift(-100);
-    MoveEncoderPID(Test, 50, 4, 0.3, 0, 0); //leave line
-    TurnMaxTimePID(Test, -60, 0.2, 0); // turn to mogo
-    TurnMaxTimePID(Test, -60, 0.2, 0); // turn to mogo
+    MoveEncoderPID(Test, 50, 5.0, 0.3, 0, 0); //leave line
+    TurnMaxTimePID(Test, -60, 0.3, 0); // turn to mogo
+    TurnMaxTimePID(Test, -60, 0.3, 0); // turn to mogo
     RunLift(0);
     MoveEncoderPID(Test, 100, 27, 0.3, -60, 0); //move to mogo
     MoveEncoderPID(Test, 50, 3, 0.3, -60, 0); // move/bump into mogo
@@ -100,17 +97,13 @@ void Blue_5(){
     Clamp.set(true);
     wait(250, msec);
     RunRoller(-100); // start roller
-    TurnMaxTimePID(Test, -150, 0.2, 0); // turn to face ring stack
-    TurnMaxTimePID(Test, -150, 0.2, 0); // turn to face ring stack
-    MoveEncoderPID(Test, -60, 9.5, 0.3, -150, 0); //intake ring
-    wait(1000, msec);
-    MoveEncoderPID(Test, 60, 3, 0.3, -150, 0); //intake ring
-    TurnMaxTimePID(Test, 55, 0.2, 0); // turn to face ring stack
-    TurnMaxTimePID(Test, 55, 0.2, 0); // turn to face ring stack
-    MoveEncoderPID(Test, -60, 10, 0.3, 55, 0); //ladder
-    RunLift(100);
-    wait(250, msec);
-    RunLift(0);
+    TurnMaxTimePID(Test, -150, 0.3, 0); // turn to face ring stack
+    TurnMaxTimePID(Test, -150, 0.3, 0); // turn to face ring stack
+    MoveEncoderPID(Test, -60, 8.0, 0.3, -150, 0); //intake ring
+    wait(500, msec);
+    TurnMaxTimePID(Test, 27, 1.0, 0); // turn to face ladder
+    RunRoller(0); // stop roller
+    MoveEncoderPID(Test, -50, 28, 0.3, 27, 0); //ladder
 
 
 
