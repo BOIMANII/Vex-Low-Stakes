@@ -69,15 +69,6 @@ __sbss_end          0x4               c:\Users\zhaoc\AppData\Roaming\Code\User\g
 Discarded input sections
 
  .text          0x00000000        0x0 build/src/main.o
- .bss.V         0x00000000        0x4 build/src/main.o
- .bss.olddegree
-                0x00000000        0x4 build/src/main.o
- .bss.dd        0x00000000        0x4 build/src/main.o
- .bss.CurrentDegree
-                0x00000000        0x4 build/src/main.o
- .bss.CurrentDegree2
-                0x00000000        0x4 build/src/main.o
- .bss.Eject     0x00000000        0x4 build/src/main.o
  .llvm_addrsig  0x00000000       0x19 build/src/main.o
  .text          0x00000000        0x0 build/src/screen_gui.o
  .text._Z13DisplayColorsv
