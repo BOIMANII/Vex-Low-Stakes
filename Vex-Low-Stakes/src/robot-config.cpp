@@ -17,8 +17,8 @@ motor LB = motor(PORT8, ratio6_1, false);
 motor RF = motor(PORT6, ratio6_1, true);
 motor RM = motor(PORT7, ratio6_1, false);
 motor RB = motor(PORT5, ratio6_1, true);
-motor Lift = motor(PORT20, ratio36_1, true);
-motor In1 = motor(PORT1, ratio6_1, false);
+motor Lift = motor(PORT1, ratio36_1, true);
+motor In1 = motor(PORT3, ratio6_1, false);
 
 
 //Pistons
