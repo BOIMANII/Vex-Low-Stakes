@@ -38,7 +38,7 @@ bool EXIT;
 void pre_auton(void) { // prepare for auto, by setting default pneu states and zeroing gyro
   //ATaskActiv = 1;
    EXIT=false;
-  Clamp.set(false);
+  Clamp.set(true);
   Doinker.set(false);
   IntakeLift.set(false);
   PX=0;
@@ -310,7 +310,7 @@ return 0;
 
 
 
-
+/*
 int ITask(void) {
   double pow;
   pow = ((Controller1.ButtonR2.pressing() - Controller1.ButtonR1.pressing()) * 100);
@@ -319,55 +319,68 @@ int ITask(void) {
   return 0;  
 
 }
+  */
 
 int hue = Csen.hue();
 bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
 
 
-/*
+int Eject = 0;
+double olddegree = 0.0;
+double pow2;
 int ITask(void) {
-    // Initialize variables
-    int olddegree = 0;
-    int Eject = 0;
-    double pow;
+    //Initialize variables
+    
+    
+    
 
     while (true) {
-        // Calculate intake power
-        pow = ((Controller1.ButtonR2.pressing() - Controller1.ButtonR1.pressing()) * 100);
         
-        // Only run the roller if not in ejection mode
-        if (Eject == 0) {
-            RunRoller(-pow);
-        }
 
         // Improved color detection logic with red hue range check
         int hue = Csen.hue();
         bool isRed = (hue >= 0 && hue <= 30) || (hue >= 330 && hue <= 360);
-
+        
         // Check if an object is detected and it's the desired color
         if (isRed && Csen.isNearObject() == 1) {
-            olddegree = In1.position(degrees) + 250;
-            Eject = 1;
-            RunRoller(0);  // Immediately stop the roller to prepare for ejection
-            Brain.Timer.clear();  // Clear the timer
+          olddegree = abs(In1.position(degrees)) + 21;
+          Eject = 1;
+          RunRoller(0);  // Immediately stop the roller to prepare for ejection
+          Brain.Timer.clear();  // Clear the timer
         }
 
-        // Eject mechanism to "yeet" the ring
-        if (Eject == 1) {
-            if (In1.position(degrees) < olddegree) {
-                RunRoller(-100);  // Increase roller speed to maximize ejection force
-            } else {
-                RunRoller(0);  // Immediately stop the roller before lifting
-                if (Brain.Timer.time(msec) < 200) {
-                    RunLift(0);
-                } else if (Brain.Timer.time(msec) < 350) {
-                    RunRoller(10);  // Yeet the ring
-                } else {
-                    RunRoller(0);  // Stop the roller after ejection
-                    Eject = 0;
-                }
-            }
+        if (Eject == 0) {
+          // Calculate intake power
+          pow2 = ((Controller1.ButtonR2.pressing() - Controller1.ButtonR1.pressing()) * 100);
+          RunRoller(-pow2);
         }
+
+
+
+        // Eject mechanism to "yeet" the ring
+        while (Eject == 1) {
+          while (abs(In1.position(degrees)) < olddegree) {
+              RunRoller(-100);  // Increase roller speed to maximize ejection force
+          }
+          RunRoller(0); 
+          olddegree = abs(In1.position(degrees)) - 83;
+          while (abs(In1.position(degrees)) > olddegree && Eject == 1)
+          {
+            RunRoller(80);
+            if (abs(In1.position(degrees)) <= olddegree){
+              RunRoller(0);
+              Eject = 0;
+            }
+          }
+          
+           
+          
+          
+      }
+
+
+
+        // Only run the roller if not in ejection mode
 
         // Small delay to prevent CPU overload
         wait(10, msec);
@@ -376,7 +389,7 @@ int ITask(void) {
 }
 
 
-*/
+
 
 
 
