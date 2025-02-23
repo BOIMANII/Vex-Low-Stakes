@@ -3,8 +3,9 @@
 
 extern int AutoSelectorVal;
 extern int RingColor;
+extern bool isColorRed;
 
-extern void DisplayColors();
+extern void onTouch();
 extern void DisplayAutoSelector();
 extern void DisplayWords();
 extern void UpdateDynamic();

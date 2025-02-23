@@ -49,6 +49,7 @@ void pre_auton(void)
   vexcodeInit();
   Gyro.calibrate();
   Gyro.setHeading(0, degrees);
+  
 
   if (LiftSensor.position(degrees) != 359)
   {
@@ -75,8 +76,9 @@ void pre_auton(void)
   waitUntil(!Gyro.isCalibrating());
 
   // DisplayColors();
-
+  onTouch();
   // waitUntil(not RingColor == 0);
+  Brain.Screen.clearScreen();
   Zeroing(true, true);
   DisplayAutoSelector();
   DisplayWords();
@@ -311,7 +313,7 @@ int DriveTask(void)
   return 0;
 }
 
-//*
+/*
 int ITask(void)
 {
   double pow;
@@ -320,17 +322,25 @@ int ITask(void)
 
   return 0;
 }
-//*/
+*/
 
 int hue = Csen.hue();
 bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
 
-/*
+//*
 int Eject = 0;
 double olddegree = 0.0;
 double pow2;
+bool isColor = 0;
 int ITask(void) {
     //Initialize variables
+    if (isColorRed == 1) {
+      bool isColor = (hue >= 0 && hue <= 30) || (hue >= 330 && hue <= 360);
+    }
+    else if (isColorRed == 0) {
+      bool isColor = (hue >= 180 && hue <= 240);
+    }
+
 
 
 
@@ -340,10 +350,10 @@ int ITask(void) {
 
         // Improved color detection logic with red hue range check
         int hue = Csen.hue();
-        bool isRed = (hue >= 0 && hue <= 30) || (hue >= 330 && hue <= 360);
+        
 
         // Check if an object is detected and it's the desired color
-        if (isRed && Csen.isNearObject() == 1) {
+        if (isColor && Csen.isNearObject() == 1) {
           olddegree = abs(In1.position(degrees)) + 19.7;
           Eject = 1;
         }
@@ -388,7 +398,7 @@ int ITask(void) {
     return 0;
 }
 
-*/
+// */
 
 int ButtonPressingX, XTaskActiv; // Defines the toggle and pressing variables for Clamping
 int ButtonPressingY, YTaskActiv; // Defines the toggle and pressing variables for Doinker
@@ -637,6 +647,7 @@ int main()
     cout << LiftSensor.angle() << endl;    // LiftSensor is the defined name for the rotation sensor
     cout << "Current" << endl;             // This is the angle of the intake, used to troubleshoot color sorting
     cout << In1.position(degrees) << endl; // In1 is the name of the intake motor, from ^, uses Rotation
+    cout << isColorRed << endl;
     /*
     Dump Pit, This is where all the unused print statements are stored, being taken out from time to time
     for their individual uses, with many for either checking the gyro rotation, Color sensor, etc.

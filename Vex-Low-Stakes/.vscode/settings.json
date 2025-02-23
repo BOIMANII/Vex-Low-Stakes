@@ -8,6 +8,27 @@
 		"iostream": "cpp",
 		"cmath": "cpp",
 		"*.tcc": "cpp",
-		"string": "cpp"
+		"string": "cpp",
+		"cctype": "cpp",
+		"chrono": "cpp",
+		"clocale": "cpp",
+		"cstdarg": "cpp",
+		"cstdint": "cpp",
+		"cstdio": "cpp",
+		"cstdlib": "cpp",
+		"ctime": "cpp",
+		"cwchar": "cpp",
+		"cwctype": "cpp",
+		"exception": "cpp",
+		"initializer_list": "cpp",
+		"iosfwd": "cpp",
+		"istream": "cpp",
+		"limits": "cpp",
+		"new": "cpp",
+		"ratio": "cpp",
+		"streambuf": "cpp",
+		"type_traits": "cpp",
+		"utility": "cpp",
+		"typeinfo": "cpp"
 	}
 }

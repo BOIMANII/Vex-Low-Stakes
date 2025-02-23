@@ -1,55 +1,71 @@
 #include "screen_gui.hpp"
 #include "vex.h"
-void DisplayColors(void)
-{
+#include <utility> // Include utility for std::pair
+
+bool isColorRed = false; // Renamed boolean
+
+
+bool colorSelected = false; // Boolean to check if a color is selected
+
+// Function to handle touch events
+void onTouch() {
   Brain.Screen.clearScreen();
-  Brain.Screen.setCursor(3, 3);
-  Brain.Screen.setPenColor("#3E92CC");
-  Brain.Screen.print("Blue");
+  Brain.Screen.setCursor(2, 1);
+  Brain.Screen.print("Tap Blue or Red, then press Confirm");
 
-  Brain.Screen.setCursor(3, 10);
-  Brain.Screen.setPenColor("#FF1B1C");
-  Brain.Screen.print("Red");
-
-  Brain.Screen.setCursor(3, 15);
-  Brain.Screen.setPenColor("#ffffff");
+  // Draw buttons
+  Brain.Screen.setPenColor(blue);
+  Brain.Screen.drawRectangle(50, 100, 100, 50);
+  Brain.Screen.setPenColor(red);
+  Brain.Screen.drawRectangle(250, 100, 100, 50);
+  Brain.Screen.setPenColor(white);
+  Brain.Screen.drawRectangle(150, 200, 100, 50);
+  Brain.Screen.setCursor(6, 8);
   Brain.Screen.print("Confirm");
 
-  // Selection Below
+  while (true) {
+    if (Brain.Screen.pressing()) {
+      int x = Brain.Screen.xPosition();
+      int y = Brain.Screen.yPosition();
 
-  while (int q = 0)
-  {
-    if (Brain.Screen.yPosition() > 6 && Brain.Screen.yPosition() < 9)
-    {
+      if (x > 50 && x < 150 && y > 100 && y < 150) {
+        isColorRed = false;
+        colorSelected = true;
+        Brain.Screen.clearScreen();
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.drawRectangle(250, 100, 100, 50); // Clear previous highlight
+        Brain.Screen.setPenColor(blue);
+        Brain.Screen.drawRectangle(50, 100, 100, 50);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.drawRectangle(150, 200, 100, 50);
+        Brain.Screen.setCursor(6, 8);
+        Brain.Screen.print("Confirm");
 
-      if (Brain.Screen.xPosition() > 0 && Brain.Screen.xPosition() < 6)
-      {
-        Brain.Screen.setCursor(6, 10);
-        Brain.Screen.print("Blue");
-        if (Brain.Screen.pressing() == true)
-        {
-          RingColor = 1;
-        }
-      }
+      } else if (x > 250 && x < 350 && y > 100 && y < 150) {
+        isColorRed = true;
+        colorSelected = true;
+        Brain.Screen.clearScreen();
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.drawRectangle(50, 100, 100, 50); // Clear previous highlight
+        Brain.Screen.setPenColor(red);
+        Brain.Screen.drawRectangle(250, 100, 100, 50);
+        Brain.Screen.setPenColor(white);
+        Brain.Screen.drawRectangle(150, 200, 100, 50);
+        Brain.Screen.setCursor(6, 8);
+        Brain.Screen.print("Confirm");
 
-      else if (Brain.Screen.xPosition() > 7 && Brain.Screen.xPosition() < 13)
-      {
-        Brain.Screen.setCursor(6, 10);
-        Brain.Screen.print("Red");
-        if (Brain.Screen.pressing() == true)
-        {
-          RingColor = 2;
+      } else if (x > 150 && x < 250 && y > 200 && y < 250 && colorSelected) {
+        Brain.Screen.clearScreen();
+        if (isColorRed) {
+          Brain.Screen.setCursor(2, 1);
+          Brain.Screen.print("Confirmed! Color: Red");
+        } else {
+          Brain.Screen.setCursor(2, 1);
+          Brain.Screen.print("Confirmed! Color: Blue");
         }
+        break;
       }
-      else if (Brain.Screen.xPosition() > 12 && Brain.Screen.xPosition() < 18)
-      {
-        Brain.Screen.setCursor(6, 10);
-        Brain.Screen.print("CONFIRMED");
-        if (Brain.Screen.pressing() == true)
-        {
-          q = 1;
-        }
-      }
+      vex::task::sleep(200); // Debounce touch event
     }
   }
 }
@@ -240,6 +256,7 @@ void UpdateDynamic(void)
     Brain.Screen.setFillColor("#FEFFEA");
   }
   Brain.Screen.setFillColor("#FEFFEA");
+
   if (AutoSelectorVal == 7)
   {
     Brain.Screen.drawRectangle(187, 175, 100, 50);
