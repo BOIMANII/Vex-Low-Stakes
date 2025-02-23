@@ -5,6 +5,7 @@
 // MoveEncoderPID(TestPara, motor speed, encoder travel distance (inches), time to full speed(sec), relative heading(to starting position), braking?)
 // TurnMaxTimePID(TestPara, Desired Heading -180 to 180, time out to calculate turn, Braking?)
 // MoveTimePID(TestPara, motor speed, time traveled (sec), time to full speed, heading, false);
+/*
 void SkillsMacro() {
     while(LiftSensor.position(degrees) > 342){
         RunLift(40);
@@ -12,7 +13,9 @@ void SkillsMacro() {
     Lift.setStopping(hold);
     Lift.stop();
 }
-void RMogo() {
+*/
+void RMogo() {}
+    /*
     Zeroing(true,true);
     LiftSensor.setPosition(359.9, degrees);
     PIDDataSet Test={1.5,0.1,0.15};
@@ -31,8 +34,8 @@ void RMogo() {
     TurnMaxTimePID(Test, 22, 0.1, 1 );//turn to line
     MoveEncoderPID(Test, -70, 75, 0.7, 22, 1);//move to far ring
     wait(300, msec);
-    TurnMaxTimePID(Test, 13, 0.1, 1);//turn to wall steak
-    MoveEncoderPID(Test, 70, 19.5, 0.7, 13, 1);//move to line
+    TurnMaxTimePID(Test, 10, 0.1, 1);//turn to wall steak
+    MoveEncoderPID(Test, 70, 20.5, 0.7, 10, 1);//move to line
     TurnMaxTimePID(Test, 90, 0.3, 1);//turn to wall steak
     SkillsMacro();
     MoveEncoderPID(Test, -70, 19, 0.7, 90, 1); // move towards wall stake
@@ -69,10 +72,10 @@ void RMogo() {
     RunRoller(-100);
     MoveEncoderPID(Test, -70, 20, 0.7, 0, 1);//get ring
     TurnMaxTimePID(Test, -22, 0.1, 1 );//turn to line
-    MoveEncoderPID(Test, -70, 78, 0.7, -22, 1);//move to far ring
+    MoveEncoderPID(Test, -70, 79, 0.7, -22, 1);//move to far ring
     wait(600, msec);
     TurnMaxTimePID(Test, -17, 0.1, 1);//turn to wall steak
-    MoveEncoderPID(Test, 70, 19.5, 0.7, -17, 1);//move to line
+    MoveEncoderPID(Test, 70, 21.5, 0.7, -17, 1);//move to line
     TurnMaxTimePID(Test, -90, 0.3, 1);//turn to wall steak
     SkillsMacro();
     MoveEncoderPID(Test, -70, 26, 2, -90, 1); // move towards wall stake
@@ -140,12 +143,12 @@ void RMogo() {
     Clamp.set(false);
     wait(400, msec);
     MoveEncoderPID(Test, -70, 6, 0.2, -130, 0); // out of corner
-    TurnMaxTimePID(Test, 37, 0.5, 0);//turn to climb
+    TurnMaxTimePID(Test, 42, 0.5, 0);//turn to climb
     RunLift(100); // run wall stakes mech
     wait(400, msec);
     RunLift(-100);
     RunLift(0);
-    MoveEncoderPID(Test, 70, 45, 0.2, 37, 0); // out of corner
-    MoveEncoderPID(Test, 50, 35, 0.2, 37, 0); // out of corner
-}
+    MoveEncoderPID(Test, 70, 45, 0.2, 42, 0); // out of corner
+    MoveEncoderPID(Test, 50, 35, 0.2, 42, 0); // out of corner
+}   */
         
