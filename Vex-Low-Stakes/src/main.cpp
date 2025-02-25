@@ -313,7 +313,7 @@ int DriveTask(void)
   return 0;
 }
 
-/*
+// /*
 int ITask(void)
 {
   double pow;
@@ -322,31 +322,33 @@ int ITask(void)
 
   return 0;
 }
-*/
-
+// */
+/*
 int hue = Csen.hue();
-bool isBlue = (Csen.hue() >= 200 && Csen.hue() <= 230);
+bool isBlue = (hue >= 200 && hue <= 230);
+bool isRed = (hue >= 0 && hue <= 30) || (hue >= 330 && hue <= 360);
+
 
 //*
 int Eject = 0;
 double olddegree = 0.0;
 double pow2;
-bool isColor = 0;
+
 int ITask(void) {
     //Initialize variables
     if (isColorRed == 1) {
-      bool isColor = (hue >= 0 && hue <= 30) || (hue >= 330 && hue <= 360);
+      bool isColor = isBlue;
     }
     else if (isColorRed == 0) {
-      bool isColor = (hue >= 180 && hue <= 240);
+      bool isColor = isRed;
     }
-
+    
 
 
 
 
     while (true) {
-
+        isColor = isColor;
 
         // Improved color detection logic with red hue range check
         int hue = Csen.hue();
@@ -398,7 +400,7 @@ int ITask(void) {
     return 0;
 }
 
-// */
+ */
 
 int ButtonPressingX, XTaskActiv; // Defines the toggle and pressing variables for Clamping
 int ButtonPressingY, YTaskActiv; // Defines the toggle and pressing variables for Doinker
