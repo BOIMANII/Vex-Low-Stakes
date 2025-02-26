@@ -88,7 +88,7 @@ void Skills(){
     TurnMaxTimePID(Test, -90, 0.3, 1);//turn to wall steak
     SkillsMacro();
     MoveTimePID(Test, 50, 1, 0.2, -90, 0); // move to wall steak
-    wait(1000, msec);
+    wait(1000, msec);///////////////////////////////////////////////////////////maybe lessen this?
     RunRoller(0); // stop running lift
     RunLift(100); // run wall stakes mech
     MoveEncoderPID(Test, -50, 3, 0.2, -90, 0); // score steak
