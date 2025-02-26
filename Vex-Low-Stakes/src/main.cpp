@@ -336,12 +336,7 @@ double pow2;
 
 int ITask(void) {
     //Initialize variables
-    if (isColorRed == 1) {
-      bool isColor = isBlue;
-    }
-    else if (isColorRed == 0) {
-      bool isColor = isRed;
-    }
+    
     
 
 
@@ -590,13 +585,19 @@ int ATask(void)
 /*                                                                           */
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
-
+bool isColor = 0;
 void usercontrol(void)
 {
   EXIT = true; // Force Exit Autosel once drivercontrol began.
   // User control code here, inside the loop
   while (1)
   {
+    if (isColorRed == 1) {
+      isColor = 1;
+    }
+    else if (isColorRed == 0) {
+      isColor = 0;
+    }
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
@@ -650,6 +651,8 @@ int main()
     cout << "Current" << endl;             // This is the angle of the intake, used to troubleshoot color sorting
     cout << In1.position(degrees) << endl; // In1 is the name of the intake motor, from ^, uses Rotation
     cout << isColorRed << endl;
+    cout << isColor << endl;
+    
     /*
     Dump Pit, This is where all the unused print statements are stored, being taken out from time to time
     for their individual uses, with many for either checking the gyro rotation, Color sensor, etc.

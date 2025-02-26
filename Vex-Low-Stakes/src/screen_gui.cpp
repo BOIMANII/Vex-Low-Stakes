@@ -10,8 +10,8 @@ bool colorSelected = false; // Boolean to check if a color is selected
 // Function to handle touch events
 void onTouch() {
   Brain.Screen.clearScreen();
-  Brain.Screen.setCursor(2, 1);
-  Brain.Screen.print("Tap Blue or Red, then press Confirm");
+  Brain.Screen.setCursor(2, 3);
+  Brain.Screen.print("Blue or Red");
 
   // Draw buttons
   Brain.Screen.setPenColor(blue);
@@ -70,6 +70,9 @@ void onTouch() {
   }
 }
 
+
+
+
 void DisplayAutoSelector(void)
 {
 
@@ -113,19 +116,19 @@ void DisplayWords(void)
   Brain.Screen.print("Right");
 
   Brain.Screen.setCursor(7, 3);
-  Brain.Screen.print("BlueMogo");
+  Brain.Screen.print("N/A");
 
   Brain.Screen.setCursor(11, 3);
-  Brain.Screen.print("Blue_S_AWP");
+  Brain.Screen.print("N/A");
 
   Brain.Screen.setCursor(3, 40);
   Brain.Screen.print("Left");
 
   Brain.Screen.setCursor(7, 40);
-  Brain.Screen.print("RedMogo");
+  Brain.Screen.print("N/A");
 
   Brain.Screen.setCursor(11, 40);
-  Brain.Screen.print("Blue_S_AWP");
+  Brain.Screen.print("N/A");
 
   Brain.Screen.setCursor(11, 22);
   Brain.Screen.print("Skills");
@@ -154,15 +157,15 @@ void UpdateDynamic(void)
   {
     Brain.Screen.drawRectangle(1, 25, 100, 50);
     Brain.Screen.setCursor(3, 3);
-    Brain.Screen.print("Blue 5");
+    Brain.Screen.print("Right");
 
     Brain.Screen.setFillColor(black);
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#FEFFEA");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("2 Rings");
+    Brain.Screen.print("Right");
     Brain.Screen.setCursor(4, 10);
-    Brain.Screen.print("2 Stakes");
+    Brain.Screen.print("6 Points");
     Brain.Screen.setFont(monoM);
     Brain.Screen.setFillColor("#FEFFEA");
   }
@@ -171,16 +174,16 @@ void UpdateDynamic(void)
   {
     Brain.Screen.drawRectangle(375, 25, 100, 50);
     Brain.Screen.setCursor(3, 40);
-    Brain.Screen.print("Red5");
+    Brain.Screen.print("Left");
 
     Brain.Screen.setFillColor(black);
 
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#FEFFEA");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("MATCHLOAD");
+    Brain.Screen.print("Left");
     Brain.Screen.setCursor(4, 10);
-    Brain.Screen.print("StealAWP");
+    Brain.Screen.print("6 Points");
     Brain.Screen.setFont(monoM);
     Brain.Screen.setFillColor("#FEFFEA");
   }
@@ -189,16 +192,16 @@ void UpdateDynamic(void)
   {
     Brain.Screen.drawRectangle(1, 100, 100, 50);
     Brain.Screen.setCursor(7, 3);
-    Brain.Screen.print("Blue Mogo");
+    Brain.Screen.print("N/A");
 
     Brain.Screen.setFillColor(black);
 
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#FEFFEA");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("Mogo Side");
+    Brain.Screen.print("N/A");
     Brain.Screen.setCursor(4, 10);
-    Brain.Screen.print("2 Ring");
+    Brain.Screen.print("N/A");
     Brain.Screen.setFont(monoM);
     Brain.Screen.setFillColor("#FEFFEA");
   }
@@ -208,16 +211,16 @@ void UpdateDynamic(void)
   {
     Brain.Screen.drawRectangle(375, 100, 100, 50);
     Brain.Screen.setCursor(7, 40);
-    Brain.Screen.print("Red Mogo");
+    Brain.Screen.print("N/A");
 
     Brain.Screen.setFillColor(black);
 
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#FEFFEA");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("Mogo Side");
+    Brain.Screen.print("N/A");
     Brain.Screen.setCursor(4, 10);
-    Brain.Screen.print("2 Ring");
+    Brain.Screen.print("N/A");
     Brain.Screen.setFont(monoM);
     Brain.Screen.setFillColor("#FEFFEA");
   }
@@ -227,15 +230,15 @@ void UpdateDynamic(void)
   {
     Brain.Screen.drawRectangle(1, 175, 100, 50);
     Brain.Screen.setCursor(11, 3);
-    Brain.Screen.print("GS-AWP");
+    Brain.Screen.print("N/A");
 
     Brain.Screen.setFillColor(black);
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#FEFFEA");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("GOAL SIDE");
+    Brain.Screen.print("N/A");
     Brain.Screen.setCursor(4, 10);
-    Brain.Screen.print("GS-AWP");
+    Brain.Screen.print("N/A");
     Brain.Screen.setFont(monoM);
     Brain.Screen.setFillColor("#FEFFEA");
   }
@@ -244,19 +247,18 @@ void UpdateDynamic(void)
   {
     Brain.Screen.drawRectangle(375, 175, 175, 50);
     Brain.Screen.setCursor(11, 40);
-    Brain.Screen.print("ML-AWP");
+    Brain.Screen.print("N/A");
     Brain.Screen.setFillColor(black);
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#FEFFEA");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("MATCHLOAD");
+    Brain.Screen.print("N/A");
     Brain.Screen.setCursor(4, 10);
-    Brain.Screen.print("ONLY AWP");
+    Brain.Screen.print("N/A");
     Brain.Screen.setFont(monoM);
     Brain.Screen.setFillColor("#FEFFEA");
   }
   Brain.Screen.setFillColor("#FEFFEA");
-
   if (AutoSelectorVal == 7)
   {
     Brain.Screen.drawRectangle(187, 175, 100, 50);

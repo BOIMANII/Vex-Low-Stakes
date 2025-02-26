@@ -86,8 +86,13 @@ void Skills(){
     MoveEncoderPID(Test, 70, 22, 0.7, -17, 1);//move to line
     TurnMaxTimePID(Test, -90, 0.3, 1);//turn to wall steak
     SkillsMacro();
+<<<<<<< HEAD
     MoveTimePID(Test, 40, 1, 0.2, -90, 0); // move to wall steak
     wait(1000, msec);
+=======
+    MoveTimePID(Test, 50, 1, 0.2, -90, 0); // move to wall steak
+    wait(1000, msec);///////////////////////////////////////////////////////////maybe lessen this?
+>>>>>>> bc9659c7e3d4c7cd8b28d8f987fed2d49aaf9098
     RunRoller(0); // stop running lift
     RunLift(100); // run wall stakes mech
     MoveEncoderPID(Test, -50, 3, 0.2, -90, 0); // score steak
