@@ -76,7 +76,7 @@ void pre_auton(void)
   waitUntil(!Gyro.isCalibrating());
 
   // DisplayColors();
-  onTouch();
+  //onTouch();
   // waitUntil(not RingColor == 0);
   Brain.Screen.clearScreen();
   Zeroing(true, true);

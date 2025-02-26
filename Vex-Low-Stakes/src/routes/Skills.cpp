@@ -30,11 +30,11 @@ void Skills(){
     wait(400, msec);
     MoveEncoderPID(Test, -50, 4, 0.4, 0, 0);//move bacc
     RunRoller(0);
-    TurnMaxTimePID(Test, -90, 0.3, 0);//turn to face mogo
+    TurnMaxTimePID(Test, -90, 0.4, 0);//turn to face mogo
     MoveEncoderPID(Test, 100, 11, 0.4, -90, 0);//go to mogo
     MoveEncoderPID(Test, 50, 23, 0.3, -90, 1);
     Clamp.set(true);
-    wait(400, msec);
+    wait(300, msec);
     TurnMaxTimePID(Test, 0, 0.3, 1);//turn to face ring
     RunRoller(-100);
     MoveEncoderPID(Test, -70, 21, 0.7, 0, 1);//get ring
@@ -53,7 +53,7 @@ void Skills(){
     wait(250, msec);
     RunLift(-100);
     wait(250, msec);
-    MoveEncoderPID(Test, 70, 2.8, 0.2, 90, 0); // move back from wall steak
+    MoveEncoderPID(Test, 70, 3, 0.2, 90, 0); // move back from wall steak
     TurnMaxTimePID(Test, 180, 0.4, 0); // turn to face rings
     RunLift(0);
     RunRoller(-150);
@@ -69,14 +69,13 @@ void Skills(){
     RunRoller(0);
     wait(250, msec);
     Clamp.set(false);
-    wait(400, msec);
-    MoveEncoderPID(Test, -50, 2.3, 0.2, -45, 0); // move out of corner
-    TurnMaxTimePID(Test, 90, 0.6, 0); // turn to face mogo
+    wait(250, msec);
+    MoveEncoderPID(Test, -50, 2.1, 0.2, -45, 0); // move out of corner
+    TurnMaxTimePID(Test, 90, 0.7, 0); // turn to face mogo
     MoveEncoderPID(Test, 90, 85, 0.2, 90, 0); // move to mogo
     MoveEncoderPID(Test, 30, 38, 0.3, 90, 1); // Move to mogo
-    wait(250, msec);
     Clamp.set(true);
-    wait(400, msec);
+    wait(250, msec);
     TurnMaxTimePID(Test, 0, 0.3, 1);//turn to face ring
     RunRoller(-100);
     MoveEncoderPID(Test, -70, 20, 0.7, 0, 1);//get ring
@@ -87,7 +86,7 @@ void Skills(){
     MoveEncoderPID(Test, 70, 22, 0.7, -17, 1);//move to line
     TurnMaxTimePID(Test, -90, 0.3, 1);//turn to wall steak
     SkillsMacro();
-    MoveTimePID(Test, 50, 1, 0.2, -90, 0); // move to wall steak
+    MoveTimePID(Test, 40, 1, 0.2, -90, 0); // move to wall steak
     wait(1000, msec);
     RunRoller(0); // stop running lift
     RunLift(100); // run wall stakes mech
@@ -95,7 +94,7 @@ void Skills(){
     wait(250, msec);
     RunLift(-100);
     wait(250, msec);
-    MoveEncoderPID(Test, 70, 5.2, 0.2, -90, 0); // move back from wall steak
+    MoveEncoderPID(Test, 70, 4.8, 0.2, -90, 0); // move back from wall steak
     TurnMaxTimePID(Test, -180, 0.3, 0); // turn to face rings
     RunLift(0);
     RunRoller(-150);
@@ -112,9 +111,9 @@ void Skills(){
     RunRoller(0);
     wait(250, msec);
     Clamp.set(false);
-    wait(400, msec);
+    wait(250, msec);
     TurnMaxTimePID(Test, 0, 0.1, 0); // turn to face other side
-    MoveEncoderPID(Test, -100, 106, 0.2, 0, 1); // move move to other side
+    MoveEncoderPID(Test, -100, 105.5, 0.2, 0, 1); // move move to other side
     TurnMaxTimePID(Test, 90, 0.3, 0);//turn to face ring
     SkillsMacro();
     RunRoller(-100);
@@ -129,10 +128,10 @@ void Skills(){
     MoveEncoderPID(Test, 50, 13, 0.2, -55, 0); // move back into mogo
     Clamp.set(true);
     wait(400, msec);
-    TurnMaxTimePID(Test, -15, 0.3, 0);//turn to alleynce steak
-    MoveEncoderPID(Test, -70, 20, 0.2, -15, 1); // move towards alleynce steak
+    TurnMaxTimePID(Test, -14, 0.3, 0);//turn to alleynce steak
+    MoveEncoderPID(Test, -40, 21, 0.2, -14, 1); // move towards alleynce steak
     wait(200, msec);
-    MoveEncoderPID(Test, 70, 5.5, 0.3, 0, 1);
+    MoveEncoderPID(Test, 70, 5.5, 0.3, -16, 1);
     RunRoller(0);
     RunLift(100); // run wall stakes mech
     wait(750, msec);
@@ -140,41 +139,42 @@ void Skills(){
     RunLift(-100);
     TurnMaxTimePID(Test, 130, 0.5, 0);//turn to red rings
     RunRoller(-100);
-    MoveEncoderPID(Test, -70, 13, 0.2, 130, 0); // pick up single ring
+    MoveEncoderPID(Test, -70, 12.1, 0.2, 130, 0); // pick up single ring
     RunLift(0);
-    wait(400, msec);
+    wait(300, msec);
     TurnMaxTimePID(Test, 45, 0.2, 0);//turn to other red ring
-    MoveEncoderPID(Test, -70, 22, 0.2, 45, 0); // pick up ring
-    wait(400, msec);
+    MoveEncoderPID(Test, -70, 22.3, 0.2, 45, 0); // pick up ring
+    wait(500, msec);
     TurnMaxTimePID(Test, 90, 0.2, 0);//turn to other red ring
-    MoveEncoderPID(Test, -40, 10, 0.2, 90, 0); // pick up ring
-    wait(400, msec);
+    MoveEncoderPID(Test, -40, 11, 0.2, 90, 0); // pick up ring
+    wait(300, msec);
     
-    MoveEncoderPID(Test, 70, 6, 0.2, 50, 0); // back up
+    MoveEncoderPID(Test, 70, 7, 0.2, 40, 0); // back up
     TurnMaxTimePID(Test, 10, 0.3, 0);//turn to other red ring
     wait(250, msec);
-    MoveEncoderPID(Test, -40, 9, 0.2, 10, 0); // pick up ring
-    wait(400, msec);
+    MoveEncoderPID(Test, -40, 11, 0.2, 10, 0); // pick up ring
+    wait(300, msec);
     Doinker.set(true);
     MoveEncoderPID(Test, 60, 3, 0.2, -60, 0); // back
     TurnMaxTimePID(Test, 60, 0.5, 0);//turn to clear
-    TurnMaxTimePID(Test, -130, 0.5, 0);//turn to corner
-    Doinker.set(false);
-    MoveTimePID(Test, -70, 1.0, 0.2, -130, 0); // move into corner
+    TurnMaxTimePID(Test, -130, 0.8, 0);//turn to corner
     RunRoller(0);
+    Doinker.set(false);
+    wait(250, msec);
     Clamp.set(false);
-    wait(400, msec);
+    wait(250, msec);
+    MoveTimePID(Test, -70, 1.0, 0.2, -130, 0); // move into corner
     MoveEncoderPID(Test, -70, 6, 0.2, -130, 0); // out of corner
     TurnMaxTimePID(Test, 42, 0.6, 0);//turn to climb
     RunLift(100); // run wall stakes mech
     wait(400, msec);
-    RunLift(-100);
     RunLift(0);
     MoveEncoderPID(Test, 70, 45, 0.2, 42, 0); // out of corner
-    MoveEncoderPID(Test, 50, 35, 0.2, 42, 0); // out of corner
+    MoveEncoderPID(Test, 60, 35, 0.2, 42, 0); // out of corner
 
 }
-        /*
+      // end here ---------------------------------------------------------------  
+/*
         TurnMaxTimePID(Test, 0, 0.3, 0);//turn to alleynce steak
         MoveEncoderPID(Test, -55, 10, 0.2, 0, 1); // move towards alleynce steak
         wait(200, msec);
