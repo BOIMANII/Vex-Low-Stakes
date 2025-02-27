@@ -590,6 +590,7 @@ void usercontrol(void)
 {
   EXIT = true; // Force Exit Autosel once drivercontrol began.
   // User control code here, inside the loop
+  Skills();
   while (1)
   {
     if (isColorRed == 1) {
