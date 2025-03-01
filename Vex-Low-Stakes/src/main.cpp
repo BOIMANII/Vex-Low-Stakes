@@ -212,7 +212,7 @@ void pre_auton(void)
     Brain.Screen.setFont(monoXL);
     Brain.Screen.setPenColor("#f8b195");
     Brain.Screen.setCursor(3, 10);
-    Brain.Screen.print("xu");
+    Brain.Screen.print("xu.shaaron");
     Brain.Screen.setCursor(4, 10);
     Brain.Screen.print("SKILLS");
     Brain.Screen.setFont(monoM);
@@ -590,7 +590,11 @@ void usercontrol(void)
 {
   EXIT = true; // Force Exit Autosel once drivercontrol began.
   // User control code here, inside the loop
-  Skills();
+  
+  //Gyro.calibrate();
+  //waitUntil(!Gyro.isCalibrating());
+  //Skills();//for driver skils
+
   while (1)
   {
     if (isColorRed == 1) {
