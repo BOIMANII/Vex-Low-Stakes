@@ -590,10 +590,13 @@ void usercontrol(void)
 {
   EXIT = true; // Force Exit Autosel once drivercontrol began.
   // User control code here, inside the loop
-  
-  //Gyro.calibrate();
-  //waitUntil(!Gyro.isCalibrating());
-  //Skills();//for driver skils
+  /*
+  Gyro.calibrate();
+  waitUntil(!Gyro.isCalibrating());
+  if (AutoSelectorVal = 7){
+    Skills();//for driver skils
+  }
+  */
 
   while (1)
   {
@@ -606,7 +609,7 @@ void usercontrol(void)
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
-
+    // Skills();
     // Runs all the tasks, helps with organizing each and every function of the robot
     task Dtask = task(DriveTask);
     task Atask = task(ATask);
@@ -633,7 +636,8 @@ int main()
 {
   // Reset pos below for Macro to function better.
   // LiftSensor.setPosition(-2, degrees);
-
+  Gyro.calibrate();
+  waitUntil(!Gyro.isCalibrating());
   // Set up callbacks for autonomous and driver control periods.
   // Runs autonomous before drivercontrol, allowing for the controller to
   // function with a field controller or a smart field
